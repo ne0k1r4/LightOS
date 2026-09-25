@@ -1,6 +1,7 @@
 # ISO build products
 iso/out/
 iso/work/
+iso/work.*/
 *.iso
 *.iso.sig
 *.img

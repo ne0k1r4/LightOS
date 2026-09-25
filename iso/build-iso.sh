@@ -10,16 +10,10 @@ if [[ -n "${LIGHTOS_ISO_WORK:-}" ]]; then
     mkdir -p "$WORK_DIR"
     CLEAN_WORK=false
 else
-    WORK_DIR="$(mktemp -d "${TMPDIR:-/tmp}/lightos-work.XXXXXX")"
+    WORK_DIR="$(mktemp -d "$ROOT/iso/work.XXXXXX")"
     CLEAN_WORK=true
 fi
-cleanup() {
-    rm -rf -- "$PROFILE_DIR"
-    if [[ "$CLEAN_WORK" == true ]]; then
-        rm -rf -- "$WORK_DIR"
-    fi
-}
-trap cleanup EXIT
+trap 'rm -rf -- "$PROFILE_DIR"' EXIT
 
 if [[ "${EUID}" -eq 0 ]]; then
     echo "Run the ISO build as a regular user, not root." >&2
@@ -51,4 +45,8 @@ cp -a "$ROOT/iso/overlay/." "$PROFILE_DIR/airootfs/"
 
 echo "Building LightOS ISO from the Archiso releng profile"
 echo "Output: $OUT_DIR"
-mkarchiso -v -w "$WORK_DIR" -o "$OUT_DIR" "$PROFILE_DIR"
+if [[ "$CLEAN_WORK" == true ]]; then
+    mkarchiso -v -r -w "$WORK_DIR" -o "$OUT_DIR" "$PROFILE_DIR"
+else
+    mkarchiso -v -w "$WORK_DIR" -o "$OUT_DIR" "$PROFILE_DIR"
+fi
