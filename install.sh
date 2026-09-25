@@ -8,8 +8,8 @@ for dependency in g++ pkg-config; do
         exit 1
     }
 done
-pkg-config --exists gtk+-3.0 gio-unix-2.0 || {
-    echo 'Install GTK3 and GIO development packages first.' >&2
+pkg-config --exists gtk+-3.0 gdk-3.0 gtk-layer-shell-0 || {
+    echo 'Install GTK3 and gtk-layer-shell development packages first.' >&2
     exit 1
 }
 

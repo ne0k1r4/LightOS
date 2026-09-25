@@ -64,14 +64,14 @@ The initial target is x86_64 Arch Linux. Hyprland requires a supported Wayland g
 =======
 # LightOS Launcher
 
-LightOS's GTK3 launcher searches installed desktop applications and starts the selected app. It displays the character artwork in `assets/launcher/` beside the app grid.
+LightOS's GTK3 edge launcher provides application search, emoji and GIF pickers, file search, and wallpaper selection. It uses the character artwork in `assets/launcher/` as its background image.
 
 ## Build and install
 
 On Arch Linux, install the build dependencies:
 
 ```sh
-sudo pacman -S base-devel gtk3
+sudo pacman -S base-devel gtk3 gtk-layer-shell curl jsoncpp openssl
 ```
 
 Then build and install for the current user:
@@ -86,5 +86,9 @@ Requires a Wayland session and Wofi. MIT licensed; see [LICENSE](LICENSE).
 =======
 The executable is installed to `~/.config/Light/bin/light-launcher`; artwork is installed to `~/.config/Light/assets/launcher/`. The default launcher image is `elflight.png`. The launcher reads `.desktop` applications from the standard system, user, and Flatpak application directories.
 
+<<<<<<< HEAD
 The launcher runs as a regular GTK window in the current desktop session. See [LICENSE](LICENSE).
 >>>>>>> 8cb02fb (Add LightOS launcher with bundled character artwork)
+=======
+The original GTK launcher includes application, emoji, Tenor GIF, file-search, and wallpaper modes. It supports Wayland layer-shell and falls back to a regular GTK window when layer-shell is unavailable. See [LICENSE](LICENSE).
+>>>>>>> fda4f88 (Restore full GTK launcher)
