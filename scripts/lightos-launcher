@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+mode="${1:-drun}"
+command -v wofi >/dev/null || { echo 'Wofi is required. Install it with: sudo pacman -S wofi' >&2; exit 1; }
+case "$mode" in
+  drun|apps) exec wofi --show drun --prompt 'Applications' ;;
+  run) exec wofi --show run --prompt 'Run command' ;;
+  windows|window) exec wofi --show window --prompt 'Windows' ;;
+  help|-h|--help) echo 'Usage: lightos-launcher [drun|run|windows]' ;;
+  *) echo "Unknown mode: $mode" >&2; exit 2 ;;
+esac

@@ -1,9 +1,10 @@
+
 # LightOS
 
 LightOS is a clean Arch Linux desktop project built around Hyprland. This repository provides two ways to install the same desktop layer:
 
-1. Build and boot a LightOS Arch ISO, install Arch with `archinstall`, then run the LightOS setup.
-2. Run the LightOS setup on an existing Arch Linux installation.
+.
+1. Run the LightOS setup on an existing Arch Linux installation.
 
 The project is in early development. This is the master repository: component projects are pinned as Git submodules so one recursive clone fetches the complete source set. It is not a finished distribution release until it has been installed and verified in a virtual machine and the remaining release checklist is complete.
 
@@ -60,3 +61,17 @@ After cloning recursively, `./install/install-lightos.sh --apply` installs the d
 ## Hardware and support
 
 The initial target is x86_64 Arch Linux. Hyprland requires a supported Wayland graphics setup. GPU-specific drivers, secure boot, disk encryption, non-Arch distributions, and automated disk installation are not configured by LightOS yet.
+=======
+# LightOS Launcher
+
+A lightweight Wofi launcher command for LightOS. Desktop applications are discovered from the standard application index.
+
+```sh
+./install.sh
+lightos-launcher
+lightos-launcher run
+lightos-launcher windows
+```
+
+Requires a Wayland session and Wofi. MIT licensed; see [LICENSE](LICENSE).
+
