@@ -2,7 +2,7 @@
 archinstall
 hyprland
 waybar
-rofi-wayland
+wofi
 kitty
 networkmanager
 openssh

@@ -2,7 +2,7 @@
 hyprland
 hyprlock
 waybar
-rofi-wayland
+wofi
 kitty
 sddm
 networkmanager
