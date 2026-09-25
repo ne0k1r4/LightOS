@@ -44,6 +44,8 @@ sudo systemctl enable sddm
 - `iso/` — Archiso profile additions and ISO builder.
 - `docs/` — release and maintenance notes.
 
+LightOS Downloader and the scalable icon theme are maintained as separate projects in `../LightOS-Downloader` and `../LightOS-Assets`. From the shared project directory, install the icon theme with `./LightOS-Assets/install.sh`, then build/install the downloader with `./LightOS-Downloader/install.sh`. Neither optional project is pulled automatically by the core installer.
+
 ## Hardware and support
 
 The initial target is x86_64 Arch Linux. Hyprland requires a supported Wayland graphics setup. GPU-specific drivers, secure boot, disk encryption, non-Arch distributions, and automated disk installation are not configured by LightOS yet.
