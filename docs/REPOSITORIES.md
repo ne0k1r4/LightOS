@@ -6,7 +6,7 @@
 - `LightOS-Installer` — existing-Arch setup and bootstrap scripts.
 - `LightOS-Settings` — GTK 4 settings and system information app.
 - `LightOS-Welcome` — GTK 4 first-run welcome app.
-- `LightOS-Launcher` — Wofi launcher command.
+- `LightOS-Launcher` — GTK application launcher and its artwork.
 - `LightOS-Workspace` — Hyprland workspace commands.
 - `LightOS-Widgets` — Waybar system status helpers.
 - `LightOS-Updater` — Arch package update helper.

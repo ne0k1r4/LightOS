@@ -1,0 +1,71 @@
+LIGHTOS RELEASE FEATURE CATALOG FOR AI TOOLS
+============================================
+
+Repository purpose
+------------------
+LightOS is an Arch Linux desktop distribution. This master repository builds
+the bootable ISO and joins the separate LightOS component repositories as
+Git submodules. Clone with --recurse-submodules before building or installing.
+
+Master repository map
+---------------------
+
+iso/
+  Archiso profile overlay, package additions, ISO build script, and output.
+  The profile is based on Arch Linux releng.
+
+packages/desktop.txt
+  Shared Arch package set used by the desktop installer and ISO profile.
+
+desktop/skel/
+  Default user configuration installed into a user's home directory.
+
+install/
+  Installation and component setup entry points.
+
+components/
+  Git submodules. Each component has its own repository, README, license,
+  build or install instructions, and independent commit history.
+
+docs/
+  Release and contributor documentation, including this catalog and the
+  repository push order.
+
+Component responsibilities
+---------------------------
+
+LightOS-Assets       SVG icon theme, status and mimetype icons, generator.
+LightOS-Downloader   Downloader application.
+LightOS-Installer    Arch bootstrap, package list, and install scripts.
+LightOS-Launcher     GTK launcher, image assets, Makefile, and installer.
+LightOS-Settings     Desktop settings application and system About page.
+LightOS-Updater      Arch package update preview and apply UI.
+LightOS-Welcome      First-run welcome application.
+LightOS-Widgets      Waybar status module scripts.
+LightOS-Workspace    Hyprland workspace helpers.
+
+Launcher image path
+-------------------
+
+The launcher installer places the program at ~/.config/Light/bin/light-launcher
+and artwork at ~/.config/Light/assets/launcher/. Its default background image
+is elflight.png. When renaming or replacing launcher art, update both the
+filename in components/LightOS-Launcher/assets/launcher/ and the default image
+name in the launcher source; install.sh copies every PNG from that directory.
+
+Maintaining image references
+----------------------------
+
+Search source, scripts, desktop entries, CSS, theme indexes, and install lists
+when image names change. Relative Waybar CSS image paths resolve from the CSS
+file. The launcher uses its per-user assets directory. LightOS-System-Assets
+in the home directory is only a browseable snapshot; its manifest.tsv maps
+snapshot paths to active source paths and SHA-256 values.
+
+Build and repository flow
+------------------------
+
+The ISO is built by iso/build-iso.sh. Desktop package selection is shared with
+the installer through packages/desktop.txt. Commit component work in its own
+submodule repository, update the component pin and any master files in
+LightOS, then push all component repositories before pushing LightOS.
