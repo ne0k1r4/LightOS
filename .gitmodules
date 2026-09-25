@@ -1,0 +1,27 @@
+[submodule "components/LightOS-Assets"]
+	path = components/LightOS-Assets
+	url = https://github.com/ne0k1r4/LightOS-Assets.git
+[submodule "components/LightOS-Downloader"]
+	path = components/LightOS-Downloader
+	url = https://github.com/ne0k1r4/LightOS-Downloader.git
+[submodule "components/LightOS-Settings"]
+	path = components/LightOS-Settings
+	url = https://github.com/ne0k1r4/LightOS-Settings.git
+[submodule "components/LightOS-Welcome"]
+	path = components/LightOS-Welcome
+	url = https://github.com/ne0k1r4/LightOS-Welcome.git
+[submodule "components/LightOS-Launcher"]
+	path = components/LightOS-Launcher
+	url = https://github.com/ne0k1r4/LightOS-Launcher.git
+[submodule "components/LightOS-Workspace"]
+	path = components/LightOS-Workspace
+	url = https://github.com/ne0k1r4/LightOS-Workspace.git
+[submodule "components/LightOS-Widgets"]
+	path = components/LightOS-Widgets
+	url = https://github.com/ne0k1r4/LightOS-Widgets.git
+[submodule "components/LightOS-Updater"]
+	path = components/LightOS-Updater
+	url = https://github.com/ne0k1r4/LightOS-Updater.git
+[submodule "components/LightOS-Installer"]
+	path = components/LightOS-Installer
+	url = https://github.com/ne0k1r4/LightOS-Installer.git

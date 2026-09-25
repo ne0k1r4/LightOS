@@ -5,7 +5,16 @@ LightOS is a clean Arch Linux desktop project built around Hyprland. This reposi
 1. Build and boot a LightOS Arch ISO, install Arch with `archinstall`, then run the LightOS setup.
 2. Run the LightOS setup on an existing Arch Linux installation.
 
-The project is in early development. The repo now contains a standalone desktop starter configuration and ISO build path. It is not a finished distribution release until it has been built and installed in a virtual machine and the remaining release checklist is complete.
+The project is in early development. This is the master repository: component projects are pinned as Git submodules so one recursive clone fetches the complete source set. It is not a finished distribution release until it has been installed and verified in a virtual machine and the remaining release checklist is complete.
+
+## Clone the complete source tree
+
+```sh
+git clone --recurse-submodules https://github.com/ne0k1r4/LightOS.git
+cd LightOS
+```
+
+If you already cloned without submodules, run `git submodule update --init --recursive`.
 
 ## Build a bootable ISO
 
@@ -43,8 +52,9 @@ sudo systemctl enable sddm
 - `install/` — additive desktop setup script.
 - `iso/` — Archiso profile additions and ISO builder.
 - `docs/` — release and maintenance notes.
+- `components/` — pinned Settings, Welcome, Launcher, Workspace, Widgets, Updater, Downloader, and Assets projects.
 
-LightOS Downloader and the scalable icon theme are maintained as separate projects in `../LightOS-Downloader` and `../LightOS-Assets`. From the shared project directory, install the icon theme with `./LightOS-Assets/install.sh`, then build/install the downloader with `./LightOS-Downloader/install.sh`. Neither optional project is pulled automatically by the core installer.
+After cloning recursively, `./install/install-lightos.sh --apply` installs the desktop configuration and available component apps. Each component can also be built and installed on its own; see its README under `components/`.
 
 ## Hardware and support
 

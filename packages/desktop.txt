@@ -18,6 +18,13 @@ qt6-wayland
 qt6-svg
 gtk3
 gtk4
+gcc
+make
+pkgconf
+cmake
+qt6-base
+jq
+pacman-contrib
 git
 curl
 fastfetch

@@ -68,6 +68,16 @@ for source in "${config_files[@]}"; do
     cp -a --remove-destination "$source" "$target"
 done
 
+if [[ -d "$ROOT/components" ]]; then
+    for component in LightOS-Assets LightOS-Downloader LightOS-Settings LightOS-Welcome LightOS-Launcher LightOS-Workspace LightOS-Widgets LightOS-Updater; do
+        installer="$ROOT/components/$component/install.sh"
+        if [[ -x "$installer" ]]; then
+            echo "Installing $component"
+            "$installer"
+        fi
+    done
+fi
+
 if [[ -d "$backup" ]]; then
     echo "Previous files were saved under $backup"
 fi
