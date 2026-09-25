@@ -47,6 +47,7 @@ echo "Building LightOS ISO from the Archiso releng profile"
 echo "Output: $OUT_DIR"
 if [[ "$CLEAN_WORK" == true ]]; then
     mkarchiso -v -r -w "$WORK_DIR" -o "$OUT_DIR" "$PROFILE_DIR"
+    rm -rf -- "$WORK_DIR"
 else
     mkarchiso -v -w "$WORK_DIR" -o "$OUT_DIR" "$PROFILE_DIR"
 fi
