@@ -4,9 +4,22 @@ set -euo pipefail
 ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 RELENG="${ARCHISO_RELENG_PROFILE:-/usr/share/archiso/configs/releng}"
 OUT_DIR="${LIGHTOS_ISO_OUT:-$ROOT/iso/out}"
-WORK_DIR="${LIGHTOS_ISO_WORK:-$ROOT/iso/work}"
 PROFILE_DIR="$(mktemp -d "${TMPDIR:-/tmp}/lightos-releng.XXXXXX")"
-trap 'rm -rf -- "$PROFILE_DIR"' EXIT
+if [[ -n "${LIGHTOS_ISO_WORK:-}" ]]; then
+    WORK_DIR="$LIGHTOS_ISO_WORK"
+    mkdir -p "$WORK_DIR"
+    CLEAN_WORK=false
+else
+    WORK_DIR="$(mktemp -d "${TMPDIR:-/tmp}/lightos-work.XXXXXX")"
+    CLEAN_WORK=true
+fi
+cleanup() {
+    rm -rf -- "$PROFILE_DIR"
+    if [[ "$CLEAN_WORK" == true ]]; then
+        rm -rf -- "$WORK_DIR"
+    fi
+}
+trap cleanup EXIT
 
 if [[ "${EUID}" -eq 0 ]]; then
     echo "Run the ISO build as a regular user, not root." >&2
@@ -15,7 +28,7 @@ fi
 command -v mkarchiso >/dev/null || { echo "Install archiso first: sudo pacman -S archiso" >&2; exit 1; }
 [[ -d "$RELENG" ]] || { echo "Archiso releng profile not found: $RELENG" >&2; exit 1; }
 
-mkdir -p "$OUT_DIR" "$WORK_DIR"
+mkdir -p "$OUT_DIR"
 cp -a "$RELENG/." "$PROFILE_DIR/"
 
 cat >> "$PROFILE_DIR/profiledef.sh" <<'PROFILE'
