@@ -1,0 +1,22 @@
+# ISO build products
+iso/out/
+iso/work/
+*.iso
+*.iso.sig
+*.img
+
+# Local secrets and overrides
+.env
+.env.*
+*.secret
+*.private
+credentials/
+local-overrides/
+
+# Build outputs
+build/
+dist/
+*.o
+*.a
+*.so
+__pycache__/

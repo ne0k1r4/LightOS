@@ -1,0 +1,10 @@
+# Packages available in the live image for installation and first boot.
+archinstall
+hyprland
+waybar
+rofi-wayland
+kitty
+networkmanager
+openssh
+git
+sudo
