@@ -37,7 +37,8 @@ Component responsibilities
 LightOS-Assets       SVG icon theme, status and mimetype icons, generator.
 LightOS-Downloader   Downloader application.
 LightOS-Installer    Arch bootstrap, package list, and install scripts.
-LightOS-Launcher     GTK launcher, image assets, Makefile, and installer.
+LightOS-Launcher     Full GTK launcher with app, emoji, GIF, file-search, and
+                     wallpaper modes, plus artwork, Makefile, and installer.
 LightOS-Settings     Desktop settings application and system About page.
 LightOS-Updater      Arch package update preview and apply UI.
 LightOS-Welcome      First-run welcome application.
