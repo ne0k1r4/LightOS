@@ -6,7 +6,7 @@ LightOS is a clean Arch Linux desktop project built around Hyprland. This reposi
 .
 1. Run the LightOS setup on an existing Arch Linux installation.
 
-The project is in early development. This is the master repository: component projects are pinned as Git submodules so one recursive clone fetches the complete source set. It is not a finished distribution release until it has been installed and verified in a virtual machine and the remaining release checklist is complete.
+The project is in early development. This is the main repository: component projects are pinned as Git submodules so one recursive clone fetches the complete source set. It is not a finished distribution release until it has been installed and verified in a virtual machine and the remaining release checklist is complete.
 
 ## Clone the complete source tree
 
@@ -38,7 +38,7 @@ cd LightOS
 # Add --with-grub to install the included GRUB theme and regenerate grub.cfg.
 ```
 
-The setup script is preview-only by default. It installs packages from the official Arch repositories, copies the included desktop defaults, and builds/installs the available LightOS components, including Settings and the clock widget. `--with-grub` adds the GRUB theme as an optional system-level step after confirmation. The setup does not partition disks, format filesystems, or enable a display manager.
+The setup script is preview-only by default. It installs packages from the official Arch repositories, copies the included desktop defaults, and builds/installs the available LightOS components, including Settings and the widgets suite (clock, visualizers, daemon, and clients). `--with-grub` adds the GRUB theme as an optional system-level step after confirmation. The setup does not partition disks, format filesystems, or enable a display manager.
 
 To use the graphical login on an installed system, enable services after reviewing the system's current setup:
 
