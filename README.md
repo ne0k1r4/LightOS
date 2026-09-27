@@ -64,14 +64,27 @@ The initial target is x86_64 Arch Linux. Hyprland requires a supported Wayland g
 =======
 # LightOS Launcher
 
-A lightweight Wofi launcher command for LightOS. Desktop applications are discovered from the standard application index.
+LightOS's GTK3 launcher searches installed desktop applications and starts the selected app. It displays the character artwork in `assets/launcher/` beside the app grid.
+
+## Build and install
+
+On Arch Linux, install the build dependencies:
+
+```sh
+sudo pacman -S base-devel gtk3
+```
+
+Then build and install for the current user:
 
 ```sh
 ./install.sh
-lightos-launcher
-lightos-launcher run
-lightos-launcher windows
 ```
 
+<<<<<<< HEAD
 Requires a Wayland session and Wofi. MIT licensed; see [LICENSE](LICENSE).
 
+=======
+The executable is installed to `~/.config/Light/bin/light-launcher`; artwork is installed to `~/.config/Light/assets/launcher/`. The default launcher image is `elflight.png`. The launcher reads `.desktop` applications from the standard system, user, and Flatpak application directories.
+
+The launcher runs as a regular GTK window in the current desktop session. See [LICENSE](LICENSE).
+>>>>>>> 8cb02fb (Add LightOS launcher with bundled character artwork)
