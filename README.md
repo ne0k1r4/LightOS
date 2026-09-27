@@ -30,13 +30,14 @@ The image is written to `iso/out/`. Boot it and install Arch using `archinstall`
 ## Install on existing Arch Linux
 
 ```sh
-git clone <LightOS-repository-url>
+git clone --recurse-submodules https://github.com/ne0k1r4/LightOS.git
 cd LightOS
 ./install/install-lightos.sh       # preview only
 ./install/install-lightos.sh --apply
+# Add --with-grub to install the included GRUB theme and regenerate grub.cfg.
 ```
 
-The setup script is preview-only by default. It installs packages from the official Arch repositories and copies the included Hyprland and Waybar starter config. It does not partition disks, format filesystems, or enable a display manager.
+The setup script is preview-only by default. It installs packages from the official Arch repositories, copies the included desktop defaults, and builds/installs the available LightOS components, including Settings and the clock widget. `--with-grub` adds the GRUB theme as an optional system-level step after confirmation. The setup does not partition disks, format filesystems, or enable a display manager.
 
 To use the graphical login on an installed system, enable services after reviewing the system's current setup:
 
@@ -54,7 +55,7 @@ sudo systemctl enable sddm
 - `docs/` — release and maintenance notes.
 - `components/` — pinned Settings, Welcome, Launcher, Workspace, Widgets, Updater, Downloader, and Assets projects.
 
-After cloning recursively, `./install/install-lightos.sh --apply` installs the desktop configuration and available component apps. Each component can also be built and installed on its own; see its README under `components/`.
+After cloning recursively, `./install/install-lightos.sh --apply` installs the desktop configuration and available component apps from this single LightOS clone. Add `--with-grub` to include the GRUB theme. Each component's source is pinned as a submodule under `components/`.
 
 ## Hardware and support
 

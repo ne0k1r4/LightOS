@@ -19,6 +19,11 @@ qt6-svg
 gtk3
 gtk-layer-shell
 gtk4
+gtkmm3
+libnm
+libpulse
+procps-ng
+psmisc
 gcc
 make
 pkgconf

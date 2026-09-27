@@ -1,14 +1,15 @@
 # LightOS projects
 
-`LightOS` is the master repository and includes each component as a Git submodule. Clone with `git clone --recurse-submodules` to fetch the full source set.
+`LightOS` is the master repository and includes each application/component as a Git submodule. Clone with `git clone --recurse-submodules` to fetch the full source set. The master installer copies the desktop defaults and invokes the components' installers, so one recursive LightOS clone is enough for desktop setup.
 
 - `LightOS` — Arch ISO profile and master project.
 - `LightOS-Installer` — existing-Arch setup and bootstrap scripts.
-- `LightOS-Settings` — GTK 4 settings and system information app.
+- `LightOS-Settings` — GTK 4 Settings app with the Death Note Realm theme; its Support UI is disabled.
 - `LightOS-Welcome` — GTK 4 first-run welcome app.
 - `LightOS-Launcher` — GTK application launcher and its artwork.
 - `LightOS-Workspace` — Hyprland workspace commands.
-- `LightOS-Widgets` — Waybar system status helpers.
+- `LightOS-Widgets` — Waybar system status helpers, buildable clock, and audio visualizers.
+- The LightOS GRUB theme is kept in `system/grub/themes/LightOS` and installed with `./install/install-lightos.sh --apply --with-grub`.
 - `LightOS-Updater` — Arch package update helper.
 - `LightOS-Downloader` — standalone Qt 6 direct-URL downloader.
 - `LightOS-Assets` — original scalable LightOS application, file-type, and status icons.

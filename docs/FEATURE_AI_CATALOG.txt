@@ -21,7 +21,10 @@ desktop/skel/
   Default user configuration installed into a user's home directory.
 
 install/
-  Installation and component setup entry points.
+  Single-clone desktop installation and component setup entry points.
+
+system/grub/themes/LightOS/
+  GRUB theme installed optionally by install/install-lightos.sh --with-grub.
 
 components/
   Git submodules. Each component has its own repository, README, license,
@@ -34,15 +37,16 @@ docs/
 Component responsibilities
 ---------------------------
 
-LightOS-Assets       SVG icon theme, status and mimetype icons, generator.
+LightOS-Assets       SVG icon theme, status and mimetype icons, artwork assets,
+                     generator, and installer.
 LightOS-Downloader   Downloader application.
 LightOS-Installer    Arch bootstrap, package list, and install scripts.
 LightOS-Launcher     Full GTK launcher with app, emoji, GIF, file-search, and
                      wallpaper modes, plus artwork, Makefile, and installer.
-LightOS-Settings     Desktop settings application and system About page.
+LightOS-Settings     GTK 4 Settings app with Death Note Realm theme; Support UI disabled.
 LightOS-Updater      Arch package update preview and apply UI.
 LightOS-Welcome      First-run welcome application.
-LightOS-Widgets      Waybar status module scripts.
+LightOS-Widgets      Waybar status module scripts, buildable GTK clock, and audio visualizers.
 LightOS-Workspace    Hyprland workspace helpers.
 
 Launcher image path

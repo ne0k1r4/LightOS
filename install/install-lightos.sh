@@ -3,15 +3,19 @@ set -euo pipefail
 
 ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 APPLY=false
-case "${1:-}" in
-    "") ;;
-    --apply) APPLY=true ;;
-    -h|--help)
-        printf 'Usage: %s [--apply]\n\nWithout --apply, this script only prints the planned changes.\n' "$0"
-        exit 0
-        ;;
-    *) echo "Unknown option: $1" >&2; exit 2 ;;
-esac
+WITH_GRUB=false
+while (($#)); do
+    case "$1" in
+        --apply) APPLY=true ;;
+        --with-grub) WITH_GRUB=true ;;
+        -h|--help)
+            printf 'Usage: %s [--apply] [--with-grub]\n\nWithout --apply, this script only prints the planned changes.\n--with-grub installs the included GRUB theme and regenerates grub.cfg.\n' "$0"
+            exit 0
+            ;;
+        *) echo "Unknown option: $1" >&2; exit 2 ;;
+    esac
+    shift
+done
 
 if [[ ! -r /etc/arch-release ]]; then
     echo "LightOS currently supports Arch Linux only." >&2
@@ -29,7 +33,13 @@ for source in "${config_files[@]}"; do
 done
 
 if [[ "$APPLY" == false ]]; then
-    echo "Preview only. Re-run with --apply to install packages and copy LightOS files."
+    if [[ "$WITH_GRUB" == true ]]; then
+        echo 'GRUB theme: system/grub/themes/LightOS -> /boot/grub/themes/LightOS'
+        echo 'GRUB defaults will be backed up before GRUB_THEME is updated.'
+        echo "Preview only. Re-run with --apply --with-grub to install everything shown."
+    else
+        echo "Preview only. Re-run with --apply to install packages and copy LightOS files."
+    fi
     exit 0
 fi
 
@@ -47,7 +57,9 @@ for source in "${config_files[@]}"; do
         exit 1
     fi
 done
-read -r -p "Install LightOS packages and copy configuration into $HOME? [y/N] " answer
+install_prompt="Install LightOS packages, configuration, and components into $HOME?"
+if [[ "$WITH_GRUB" == true ]]; then install_prompt+=" Include the GRUB theme and regenerate GRUB config?"; fi
+read -r -p "$install_prompt [y/N] " answer
 [[ "$answer" =~ ^[Yy]$ ]] || { echo "Cancelled."; exit 0; }
 
 sudo pacman -S --needed "${packages[@]}"
@@ -76,6 +88,11 @@ if [[ -d "$ROOT/components" ]]; then
             "$installer"
         fi
     done
+fi
+
+if [[ "$WITH_GRUB" == true ]]; then
+    echo 'Installing the optional LightOS GRUB theme.'
+    "$ROOT/system/grub/install-theme.sh"
 fi
 
 if [[ -d "$backup" ]]; then
