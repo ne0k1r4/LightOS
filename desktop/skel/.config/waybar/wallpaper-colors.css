@@ -1,0 +1,7 @@
+/* Fallback palette; wallpaper-colors.py regenerates this after selection. */
+@define-color wallpaper_accent #6e77bd;
+@define-color wallpaper_accent_soft #b9b8d0;
+@define-color wallpaper_accent_pale #dcdcE8;
+@define-color wallpaper_accent_deep #3b405f;
+@define-color wallpaper_ink #1e1e2e;
+@define-color wallpaper_text #ffffff;

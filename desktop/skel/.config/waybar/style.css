@@ -1,3 +1,5 @@
+@import "wallpaper-colors.css";
+
 * {
   font-family: "JetBrainsMono Nerd Font", sans-serif;
   font-size: 12px;
@@ -7,8 +9,8 @@
 }
 
 window#waybar {
-  background: rgba(20, 23, 32, 0.94);
-  color: #e8ecf5;
+  background: alpha(@wallpaper_ink, 0.94);
+  color: @wallpaper_text;
 }
 
 #workspaces button,
@@ -21,18 +23,18 @@ window#waybar {
   padding: 0 10px;
   margin: 4px 2px;
   border-radius: 7px;
-  background: #292e3d;
+  background: @wallpaper_accent_pale;
 }
 
 #workspaces button.active {
-  background: #547fe8;
-  color: #ffffff;
+  background: @wallpaper_accent;
+  color: @wallpaper_text;
 }
 
 #battery.warning {
-  color: #ffd166;
+  color: @wallpaper_accent_soft;
 }
 
 #battery.critical {
-  color: #ff6b6b;
+  color: @wallpaper_accent_deep;
 }
