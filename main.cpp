@@ -419,7 +419,15 @@ void EnhancedEdgeLauncher::detect_theme_variant() {
     theme_variant = ThemeVariant::LightOS;
     accent_hex = "#FD84CB";
     border_hex = "#FD84CB";
-    image_filename = "elflight.png";
+    // Randomly select one of the available background images each launch
+    static const std::vector<std::string> bg_images = {
+        "elflight.png",
+        "hocelf.png",
+        "memrene.png"
+    };
+    static std::mt19937 rng(std::random_device{}());
+    std::uniform_int_distribution<size_t> dist(0, bg_images.size() - 1);
+    image_filename = bg_images[dist(rng)];
 }
 
 void EnhancedEdgeLauncher::load_cache() {
