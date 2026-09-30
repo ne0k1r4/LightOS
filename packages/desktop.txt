@@ -46,3 +46,16 @@ network-manager-applet
 ttf-jetbrains-mono-nerd
 noto-fonts
 noto-fonts-emoji
+ffmpeg
+python
+python-pillow
+swww
+mpvpaper
+swaync
+rofi-wayland
+starship
+zoxide
+lsd
+yazi
+fzf
+zsh
