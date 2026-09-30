@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-MAX_COLS=28   # max columns the banner may occupy
-MAX_ROWS=14   # max rows the banner may occupy
+MAX_COLS=20   # max columns the banner may occupy
+MAX_ROWS=10   # max rows the banner may occupy
 
 image="$(find "$HOME/.config/Light/bash" -maxdepth 1 -type f \( -iname '*.png' -o -iname '*.gif' \) | shuf -n 1)"
 [[ -n "$image" ]] || exit 0
@@ -77,8 +77,8 @@ if [[ "$img_pw" -gt 0 && "$img_ph" -gt 0 && "$cell_pw" -gt 0 && "$cell_ph" -gt 0
     # clamp
     [[ "$box_w" -gt "$MAX_COLS" ]] && box_w=$MAX_COLS
     [[ "$box_h" -gt "$MAX_ROWS" ]] && box_h=$MAX_ROWS
-    [[ "$box_w" -lt 8  ]] && box_w=8
-    [[ "$box_h" -lt 5  ]] && box_h=5
+    [[ "$box_w" -lt 6  ]] && box_w=6
+    [[ "$box_h" -lt 4  ]] && box_h=4
 else
     box_w=20
     box_h=10
