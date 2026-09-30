@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-BANNER_W=20
+BANNER_W=12
 BANNER_H=10
 
 image="$(find "$HOME/.config/Light/bash" -maxdepth 1 -type f \( -iname '*.png' -o -iname '*.gif' \) | shuf -n 1)"
