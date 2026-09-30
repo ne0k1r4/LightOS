@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-MAX_W_FRAC=40   # max % of terminal columns the banner may occupy
-MAX_H_FRAC=40   # max % of terminal rows the banner may occupy
+MAX_COLS=28   # max columns the banner may occupy
+MAX_ROWS=14   # max rows the banner may occupy
 
 image="$(find "$HOME/.config/Light/bash" -maxdepth 1 -type f \( -iname '*.png' -o -iname '*.gif' \) | shuf -n 1)"
 [[ -n "$image" ]] || exit 0
@@ -15,28 +15,26 @@ ext="${ext,,}"
 term_cols=$(tput cols)
 term_rows=$(tput lines)
 
-# --- get terminal cell pixel size via kitty icat ---
-# Output format: "WpxHp\nCcxRc"  (pixels then cells)
+# --- get terminal cell pixel size ---
+# kitty icat --print-window-size outputs one line: WIDTHxHEIGHT in pixels
 cell_pw=0
 cell_ph=0
-win_info="$(kitty +kitten icat --print-window-size 2>/dev/null)"
-if [[ -n "$win_info" ]]; then
-    px_line="$(echo "$win_info" | head -1)"   # e.g. 1920x1080
-    cell_line="$(echo "$win_info" | tail -1)" # e.g. 192x54
-    px_w="${px_line%%x*}"; px_h="${px_line##*x}"
-    cl_w="${cell_line%%x*}"; cl_h="${cell_line##*x}"
-    if [[ "$cl_w" -gt 0 && "$cl_h" -gt 0 ]] 2>/dev/null; then
-        cell_pw=$(( px_w / cl_w ))
-        cell_ph=$(( px_h / cl_h ))
+win_px="$(kitty +kitten icat --print-window-size 2>/dev/null)"
+if [[ -n "$win_px" && "$term_cols" -gt 0 && "$term_rows" -gt 0 ]]; then
+    px_w="${win_px%%x*}"
+    px_h="${win_px##*x}"
+    if [[ "$px_w" -gt 0 && "$px_h" -gt 0 ]] 2>/dev/null; then
+        cell_pw=$(( px_w / term_cols ))
+        cell_ph=$(( px_h / term_rows ))
     fi
 fi
 
-# fallback: estimate cell size from font_size in kitty.conf
+# fallback: estimate from font_size in kitty.conf
 if [[ "$cell_pw" -le 0 || "$cell_ph" -le 0 ]]; then
     font_size=$(grep -m1 'font_size' "$HOME/.config/kitty/kitty.conf" 2>/dev/null | awk '{print int($2)}')
     font_size=${font_size:-12}
-    cell_pw=$(( font_size * 6 / 10 ))   # ~0.6x font_size
-    cell_ph=$(( font_size * 14 / 10 ))  # ~1.4x font_size (line height)
+    cell_pw=$(( font_size * 6 / 10 ))
+    cell_ph=$(( font_size * 14 / 10 ))
 fi
 
 # --- get image pixel dimensions ---
@@ -58,25 +56,17 @@ print(img.size[0], img.size[1])
 fi
 
 # --- compute cell box ---
-max_cols=$(( term_cols * MAX_W_FRAC / 100 ))
-max_rows=$(( term_rows * MAX_H_FRAC / 100 ))
-
-# ensure minimum of 10 cols / 5 rows
-[[ "$max_cols" -lt 10 ]] && max_cols=10
-[[ "$max_rows" -lt 5  ]] && max_rows=5
-
 if [[ "$img_pw" -gt 0 && "$img_ph" -gt 0 && "$cell_pw" -gt 0 && "$cell_ph" -gt 0 ]]; then
-    # scale to fit within max_cols x max_rows, preserving aspect ratio
-    # fit by width
-    fit_w_cols=$max_cols
+    # try fitting to MAX_COLS wide
+    fit_w_cols=$MAX_COLS
     fit_w_rows=$(( img_ph * fit_w_cols * cell_pw / (img_pw * cell_ph) ))
 
-    # fit by height
-    fit_h_rows=$max_rows
+    # try fitting to MAX_ROWS tall
+    fit_h_rows=$MAX_ROWS
     fit_h_cols=$(( img_pw * fit_h_rows * cell_ph / (img_ph * cell_pw) ))
 
-    # pick whichever fits both dimensions
-    if [[ "$fit_w_rows" -le "$max_rows" ]]; then
+    # use whichever fits within both limits
+    if [[ "$fit_w_rows" -le "$MAX_ROWS" ]]; then
         box_w=$fit_w_cols
         box_h=$fit_w_rows
     else
@@ -84,13 +74,12 @@ if [[ "$img_pw" -gt 0 && "$img_ph" -gt 0 && "$cell_pw" -gt 0 && "$cell_ph" -gt 0
         box_h=$fit_h_rows
     fi
 
-    # clamp to bounds
-    [[ "$box_w" -gt "$max_cols" ]] && box_w=$max_cols
-    [[ "$box_h" -gt "$max_rows" ]] && box_h=$max_rows
-    [[ "$box_w" -lt 1 ]] && box_w=1
-    [[ "$box_h" -lt 1 ]] && box_h=1
+    # clamp
+    [[ "$box_w" -gt "$MAX_COLS" ]] && box_w=$MAX_COLS
+    [[ "$box_h" -gt "$MAX_ROWS" ]] && box_h=$MAX_ROWS
+    [[ "$box_w" -lt 8  ]] && box_w=8
+    [[ "$box_h" -lt 5  ]] && box_h=5
 else
-    # fallback fixed size
     box_w=20
     box_h=10
 fi
