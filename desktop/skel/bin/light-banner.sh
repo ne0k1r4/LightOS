@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-MAX_COLS=20   # max columns the banner may occupy
-MAX_ROWS=10   # max rows the banner may occupy
+MAX_COLS=20
+MAX_ROWS=10
 
 image="$(find "$HOME/.config/Light/bash" -maxdepth 1 -type f \( -iname '*.png' -o -iname '*.gif' \) | shuf -n 1)"
 [[ -n "$image" ]] || exit 0
@@ -11,12 +11,9 @@ image="$(find "$HOME/.config/Light/bash" -maxdepth 1 -type f \( -iname '*.png' -
 ext="${image##*.}"
 ext="${ext,,}"
 
-# --- get terminal dimensions in cells ---
 term_cols=$(tput cols)
 term_rows=$(tput lines)
 
-# --- get terminal cell pixel size ---
-# kitty icat --print-window-size outputs one line: WIDTHxHEIGHT in pixels
 cell_pw=0
 cell_ph=0
 win_px="$(kitty +kitten icat --print-window-size 2>/dev/null)"
@@ -29,7 +26,6 @@ if [[ -n "$win_px" && "$term_cols" -gt 0 && "$term_rows" -gt 0 ]]; then
     fi
 fi
 
-# fallback: estimate from font_size in kitty.conf
 if [[ "$cell_pw" -le 0 || "$cell_ph" -le 0 ]]; then
     font_size=$(grep -m1 'font_size' "$HOME/.config/kitty/kitty.conf" 2>/dev/null | awk '{print int($2)}')
     font_size=${font_size:-12}
@@ -37,7 +33,6 @@ if [[ "$cell_pw" -le 0 || "$cell_ph" -le 0 ]]; then
     cell_ph=$(( font_size * 14 / 10 ))
 fi
 
-# --- get image pixel dimensions ---
 img_pw=0
 img_ph=0
 if command -v identify >/dev/null 2>&1; then
@@ -55,17 +50,11 @@ print(img.size[0], img.size[1])
     img_ph="${dims##* }"
 fi
 
-# --- compute cell box ---
 if [[ "$img_pw" -gt 0 && "$img_ph" -gt 0 && "$cell_pw" -gt 0 && "$cell_ph" -gt 0 ]]; then
-    # try fitting to MAX_COLS wide
     fit_w_cols=$MAX_COLS
     fit_w_rows=$(( img_ph * fit_w_cols * cell_pw / (img_pw * cell_ph) ))
-
-    # try fitting to MAX_ROWS tall
     fit_h_rows=$MAX_ROWS
     fit_h_cols=$(( img_pw * fit_h_rows * cell_ph / (img_ph * cell_pw) ))
-
-    # use whichever fits within both limits
     if [[ "$fit_w_rows" -le "$MAX_ROWS" ]]; then
         box_w=$fit_w_cols
         box_h=$fit_w_rows
@@ -73,18 +62,15 @@ if [[ "$img_pw" -gt 0 && "$img_ph" -gt 0 && "$cell_pw" -gt 0 && "$cell_ph" -gt 0
         box_w=$fit_h_cols
         box_h=$fit_h_rows
     fi
-
-    # clamp
     [[ "$box_w" -gt "$MAX_COLS" ]] && box_w=$MAX_COLS
     [[ "$box_h" -gt "$MAX_ROWS" ]] && box_h=$MAX_ROWS
-    [[ "$box_w" -lt 6  ]] && box_w=6
-    [[ "$box_h" -lt 4  ]] && box_h=4
+    [[ "$box_w" -lt 6 ]] && box_w=6
+    [[ "$box_h" -lt 4 ]] && box_h=4
 else
     box_w=20
     box_h=10
 fi
 
-# --- display ---
 if [[ "$ext" == "gif" ]]; then
     kitty +kitten icat --place "${box_w}x${box_h}@0x0" --align left --scale-up --loop -1 "$image" &
 else
