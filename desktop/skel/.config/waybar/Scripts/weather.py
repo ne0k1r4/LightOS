@@ -20,8 +20,6 @@ DEFAULT_GLYPH = ""
 
 def get_weather():
     try:
-        # empty location = wttr.in figures it out from your ip, change to
-        # "https://wttr.in/YourCity?format=j1" if you want it locked in
         res = requests.get("https://wttr.in/?format=j1", timeout=5)
         data = res.json()
         current = data['current_condition'][0]

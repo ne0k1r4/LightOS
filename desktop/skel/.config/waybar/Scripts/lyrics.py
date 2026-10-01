@@ -37,7 +37,6 @@ def get_position(player):
         return 0.0
 
 def parse_lrc(lrc_text):
-    # turns raw lrc string into a sorted list of (seconds, line)
     lines = []
     for raw_line in lrc_text.split('\n'):
         if not raw_line.startswith('['):

@@ -2,68 +2,52 @@ import subprocess
 import time
 import json
 
-# Customization settings
 GLYPH_FONT_FAMILY = "Symbols Nerd Font Mono"
 GLYPHS = {
-    "paused": "",
-    "playing": " ",
-    "stopped": " "
+    "paused": "",
+    "playing": " ",
+    "stopped": " "
 }
 
-DEFAULT_GLYPH = ""  # Glyph when status is unknown or default
-TEXT_WHEN_STOPPED = "Nothing"  # Text to display when nothing is playing
-SCROLL_TEXT_LENGTH = 15  # Length of the song title part (excludes glyph and space)
-REFRESH_INTERVAL = 0.5  # How often the script updates (in seconds)
-PLAYERCTL_PATH = "/usr/bin/playerctl" # Path to playerctl, use which playerctl to find yours.
+DEFAULT_GLYPH = ""
+TEXT_WHEN_STOPPED = "Nothing"
+SCROLL_TEXT_LENGTH = 15
+REFRESH_INTERVAL = 0.5
+PLAYERCTL_PATH = "/usr/bin/playerctl"
 
 def get_active_players():
     result = subprocess.run([PLAYERCTL_PATH, '-l'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     players = result.stdout.decode('utf-8').strip().split('\n')
     players = [p for p in players if "firefox" not in p.lower() and "chroms" not in p.lower()]
-    
-    if "kew" in players:  # Force kew if it's available
+    if "kew" in players:
         return ["kew"]
-    if "chromium" in players:  # Force kew if it's available
+    if "chromium" in players:
         return ["chromium"]
     return players
 
-
 def get_player_status(player):
-    print(f"Checking status for player: {player}")  # Debugging
-    """
-    Get the status of a specific player.
-    """
     try:
         result = subprocess.run([PLAYERCTL_PATH, '-p', player, 'status'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         status = result.stdout.decode('utf-8').strip().lower()
-        print(f"Status for {player}: {status}")  # Debugging
         if result.returncode != 0 or not status:
             return "stopped"
         return status
-    except Exception as e:
+    except Exception:
         return "stopped"
 
 def get_current_song(player):
-    """
-    Get the current song metadata (title and artist) for a specific player.
-    """
     try:
         result_title = subprocess.run([PLAYERCTL_PATH, '-p', player, 'metadata', 'title'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         song_title = result_title.stdout.decode('utf-8').strip()
-
         result_artist = subprocess.run([PLAYERCTL_PATH, '-p', player, 'metadata', 'artist'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         artist_name = result_artist.stdout.decode('utf-8').strip()
-
         if result_title.returncode != 0 or not song_title:
             return None
         return f"{song_title} by {artist_name}" if artist_name else song_title
-    except Exception as e:
+    except Exception:
         return None
 
 def scroll_text(text, length=SCROLL_TEXT_LENGTH):
-    """
-    Generate scrolling text for the song title.
-    """
     text = text.ljust(length)
     scrolling_text = text + ' ' + text[:length]
     for i in range(len(scrolling_text) - length):
@@ -71,19 +55,15 @@ def scroll_text(text, length=SCROLL_TEXT_LENGTH):
 
 if __name__ == "__main__":
     scroll_generator = None
-
     while True:
         output = {}
         try:
             players = get_active_players()
-            print("Detected players:", players)
             if players:
-                # Use the first active player (can be adjusted to prioritize specific players)
                 player = players[0]
                 status = get_player_status(player)
                 song = get_current_song(player)
                 glyph = GLYPHS.get(status, DEFAULT_GLYPH)
-
                 if song:
                     if len(song) > SCROLL_TEXT_LENGTH:
                         if scroll_generator is None:
@@ -98,12 +78,10 @@ if __name__ == "__main__":
                         scroll_generator = None
                 else:
                     song_text = TEXT_WHEN_STOPPED.ljust(SCROLL_TEXT_LENGTH)
-
                 output['text'] = f"<span font_family='{GLYPH_FONT_FAMILY}'>{glyph}</span> {song_text}"
             else:
                 output['text'] = TEXT_WHEN_STOPPED.ljust(SCROLL_TEXT_LENGTH + 2)
         except Exception as e:
-            output['text'] = f" Error: {str(e)}".ljust(SCROLL_TEXT_LENGTH + 2)
-
+            output['text'] = f" Error: {str(e)}".ljust(SCROLL_TEXT_LENGTH + 2)
         print(json.dumps(output), end='\n')
         time.sleep(REFRESH_INTERVAL)
