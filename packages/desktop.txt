@@ -49,6 +49,7 @@ noto-fonts-emoji
 ffmpeg
 python
 python-pillow
+imagemagick
 swww
 mpvpaper
 swaync
