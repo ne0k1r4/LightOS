@@ -1,3 +1,11 @@
+-- Converted from window_rules.conf.bak
+-- (this file was previously empty even though hyprland.lua does
+--  require("window_rules") -- all rules below were silently missing)
+
+----------------------------------
+-- TRANSPARENT BACKGROUND APPS ---
+----------------------------------
+
 hl.window_rule({ match = { class = "sxiv" }, opacity = "0.85 0.85" })
 hl.window_rule({ match = { class = "google-chrome" }, opacity = "0.80 0.65" })
 hl.window_rule({ match = { class = "Spotify" }, opacity = "0.7 0.7" })
@@ -17,8 +25,12 @@ hl.window_rule({ match = { class = "floorp" }, opacity = "0.80 0.55" })
 hl.window_rule({ match = { class = "floorp", title = ".*YouTube.* — Ablaze Floorp" }, opacity = "0.95 0.55 override" })
 hl.window_rule({ match = { class = "floorp", title = ".* — Ablaze Floorp Private Browsing" }, opacity = "0.95 0.55 override" })
 hl.window_rule({ match = { class = "floorp", title = ".*pixiv.* — Ablaze Floorp" }, opacity = "0.95 0.55 override" })
+hl.window_rule({ match = { class = "floorp", title = ".*nhentai.* — Ablaze Floorp" }, opacity = "0.95 0.55 override" })
+
 hl.window_rule({ match = { class = "mpv" }, float = true })
+
 hl.window_rule({ match = { class = "com.system76.CosmicStore" }, float = true })
+
 hl.window_rule({ match = { class = "xdg-desktop-portal-gtk", title = ".*All Files" }, float = true })
 hl.window_rule({ match = { class = "xdg-desktop-portal-gtk", title = ".*Open Files" }, float = true })
 hl.window_rule({ match = { class = "qimgv" }, float = true })
@@ -27,17 +39,44 @@ hl.window_rule({ match = { class = "imv" }, float = true })
 hl.window_rule({ match = { class = "sxiv" }, float = true })
 hl.window_rule({ match = { class = "thunar", title = ".*File Operation Progress" }, float = true })
 hl.window_rule({ match = { class = "thunar", title = ".*File Operation Progress" }, size = { 713, 422 } })
+
+------------------------------------
+-- PICTURE IN PICTURE (YOUTUBE) -----
+------------------------------------
+
 hl.window_rule({ match = { title = "Picture-in-Picture$" }, float = true })
 hl.window_rule({ match = { title = "Picture-in-Picture$" }, no_anim = true })
 hl.window_rule({ match = { title = "Picture-in-Picture$" }, size = { 600, 340 } })
 hl.window_rule({ match = { title = "Picture-in-Picture$" }, move = { 1310, 730 } })
+
+----------------
+-- WIDGETS -----
+----------------
+
+
 hl.window_rule({ match = { class = "about_system" }, float = true })
 hl.window_rule({ match = { class = "about_system" }, move = { 72, 110 } })
+
+------------------------
+-- LAYER ANIMATIONS -----
+------------------------
+
+
+
 hl.layer_rule({ match = { namespace = "swaync-control-center" }, animation = "slide right" })
 hl.layer_rule({ match = { namespace = "swaync-notification" }, animation = "slide right" })
+
 hl.layer_rule({ match = { namespace = "swaync-control-center" }, blur = true, ignore_alpha = 0.2 })
 hl.layer_rule({ match = { namespace = "swaync-notification" }, blur = true, ignore_alpha = 0.2 })
+
+------------------------------------
 hl.window_rule({ match = { class = "dev.zed.Zed" }, opacity = "0.92 0.8" })
 hl.window_rule({ match = { class = "org.wireshark.Wireshark" }, opacity = "0.95 0.85" })
 hl.window_rule({ match = { class = "Ferdium" }, opacity = "0.9 0.75" })
-hl.layer_rule({ match = { namespace = "org.light.ClockWidget" }, animation = "popin 50%" })
+
+-- Light ClockWidget
+hl.layer_rule({
+  match = { namespace = "org.light.ClockWidget" },
+  animation = "popin 50%",
+})
+
