@@ -1,94 +1,86 @@
-
 # LightOS
 
-LightOS is a clean Arch Linux desktop project built around Hyprland. This repository provides two ways to install the same desktop layer:
+A gothic anime Hyprland desktop for Arch Linux — Death Note themed, Misa Amane aesthetic, with a full suite of custom widgets, launchers, wallpapers, and icon themes.
 
-.
-1. Run the LightOS setup on an existing Arch Linux installation.
+![LightOS Desktop](desktop/skel/.config/hypr/welcoming/welcome.png)
 
-The project is in early development. This is the main repository: component projects are pinned as Git submodules so one recursive clone fetches the complete source set. It is not a finished distribution release until it has been installed and verified in a virtual machine and the remaining release checklist is complete.
+## Install on Arch Linux
 
-## Clone the complete source tree
+### Option 1 — From the ISO
 
+1. Download the latest LightOS ISO from [Releases](https://github.com/ne0k1r4/LightOS/releases)
+2. Flash it to a USB drive:
+   ```sh
+   dd if=lightos.iso of=/dev/sdX bs=4M status=progress && sync
+   ```
+3. Boot from USB, install Arch with `archinstall`, then run the desktop installer:
+   ```sh
+   curl -fsSL https://raw.githubusercontent.com/ne0k1r4/LightOS/main/install/install-lightos.sh | bash
+   ```
+
+### Option 2 — On an existing Arch Linux system
+
+Clone the repository with all components:
 ```sh
 git clone --recurse-submodules https://github.com/ne0k1r4/LightOS.git
 cd LightOS
 ```
 
-If you already cloned without submodules, run `git submodule update --init --recursive`.
-
-## Build a bootable ISO
-
-On an up-to-date Arch Linux build host:
-
+Run the installer:
 ```sh
-sudo pacman -S --needed archiso
-./iso/build-iso.sh
+bash install/install-lightos.sh --apply
 ```
 
-The image is written to `iso/out/`. Boot it and install Arch using `archinstall`. After booting into the installed system, clone this repository and run the setup script there.
-
-## Install on existing Arch Linux
-
+Optionally install the LightOS GRUB theme:
 ```sh
-git clone --recurse-submodules https://github.com/ne0k1r4/LightOS.git
-cd LightOS
-./install/install-lightos.sh       # preview only
-./install/install-lightos.sh --apply
-# Add --with-grub to install the included GRUB theme and regenerate grub.cfg.
+bash install/install-lightos.sh --apply --with-grub
 ```
 
-The setup script is preview-only by default. It installs packages from the official Arch repositories, copies the included desktop defaults, and builds/installs the available LightOS components, including Settings and the widgets suite (clock, visualizers, daemon, and clients). `--with-grub` adds the GRUB theme as an optional system-level step after confirmation. The setup does not partition disks, format filesystems, or enable a display manager.
+That's it. The installer sets up Hyprland, Waybar, all widgets, wallpapers, icons, fonts, and shell config. Log out and select Hyprland from your display manager.
 
-To use the graphical login on an installed system, enable services after reviewing the system's current setup:
+## Requirements
 
-```sh
-sudo systemctl enable --now NetworkManager
-sudo systemctl enable sddm
-```
+- Arch Linux (fresh install recommended)
+- Internet connection during install
+- No other desktop environment required
 
-## Repository layout
+## What's included
 
-- `desktop/skel/` — default user configuration installed into a home directory.
-- `packages/` — packages shared by the ISO and existing-Arch setup.
-- `install/` — additive desktop setup script.
-- `iso/` — Archiso profile additions and ISO builder.
-- `docs/` — release and maintenance notes.
-- `components/` — pinned Settings, Welcome, Launcher, Workspace, Widgets, Updater, Downloader, and Assets projects.
+| Component | Description |
+|---|---|
+| Hyprland config | Lua-based, fully commented, keybinds, rules, animations |
+| Waybar | Wallpaper-driven color palette, custom icons, media/stats modules |
+| Light Launcher | GTK3 app launcher with emoji, GIF, file search, wallpaper picker |
+| Clock Widget | Hour-based artwork display, gothic themed |
+| Workspace Switcher | Death Note spine layout with dynamic glow colors |
+| Audio Visualizer | Wave+fill style, wallpaper-color driven |
+| LightOS Settings | GTK4 system settings app |
+| Icon Theme | Gothic anime PNG mime, app, and status icons |
+| Wallpapers | Dark and Light sets, images and videos |
+| Terminal Banner | Random gothic artwork at shell startup |
 
-After cloning recursively, `./install/install-lightos.sh --apply` installs the desktop configuration and available component apps from this single LightOS clone. Add `--with-grub` to include the GRUB theme. Each component's source is pinned as a submodule under `components/`.
+## Keybinds (defaults)
 
-## Hardware and support
+| Key | Action |
+|---|---|
+| `Super + T` | Open terminal (kitty) |
+| `Super + L` | Open launcher |
+| `Super + Tab` | Workspace switcher |
+| `Super + Shift + W` | Wallpaper picker |
+| `Super + Q` | Close window |
+| `Super + 1–9` | Switch workspace |
 
-The initial target is x86_64 Arch Linux. Hyprland requires a supported Wayland graphics setup. GPU-specific drivers, secure boot, disk encryption, non-Arch distributions, and automated disk installation are not configured by LightOS yet.
-=======
-# LightOS Launcher
+## Components
 
-LightOS's GTK3 edge launcher provides application search, emoji and GIF pickers, file search, and wallpaper selection. It uses the character artwork in `assets/launcher/` as its background image.
+Each component is a standalone repository and Git submodule:
 
-## Build and install
+- [LightOS-Assets](https://github.com/ne0k1r4/LightOS-Assets) — icons, wallpapers, bash banners
+- [LightOS-Launcher](https://github.com/ne0k1r4/LightOS-Launcher) — GTK3 app launcher
+- [LightOS-Widgets](https://github.com/ne0k1r4/LightOS-Widgets) — clock, visualizer, widget suite
+- [LightOS-Workspace](https://github.com/ne0k1r4/LightOS-Workspace) — workspace switcher
+- [LightOS-Settings](https://github.com/ne0k1r4/LightOS-Settings) — GTK4 settings app
+- [LightOS-Installer](https://github.com/ne0k1r4/LightOS-Installer) — bootstrap and install scripts
 
-On Arch Linux, install the build dependencies:
+## License
 
-```sh
-sudo pacman -S base-devel gtk3 gtk-layer-shell curl jsoncpp openssl
-```
-
-Then build and install for the current user:
-
-```sh
-./install.sh
-```
-
-<<<<<<< HEAD
-Requires a Wayland session and Wofi. MIT licensed; see [LICENSE](LICENSE).
-
-=======
-The executable is installed to `~/.config/Light/bin/light-launcher`; artwork is installed to `~/.config/Light/assets/launcher/`. The default launcher image is `elflight.png`. The launcher reads `.desktop` applications from the standard system, user, and Flatpak application directories.
-
-<<<<<<< HEAD
-The launcher runs as a regular GTK window in the current desktop session. See [LICENSE](LICENSE).
->>>>>>> 8cb02fb (Add LightOS launcher with bundled character artwork)
-=======
-The original GTK launcher includes application, emoji, Tenor GIF, file-search, and wallpaper modes. It supports Wayland layer-shell and falls back to a regular GTK window when layer-shell is unavailable. See [LICENSE](LICENSE).
->>>>>>> fda4f88 (Restore full GTK launcher)
+MIT — see [LICENSE](LICENSE). Component licenses retained in their respective repositories.
