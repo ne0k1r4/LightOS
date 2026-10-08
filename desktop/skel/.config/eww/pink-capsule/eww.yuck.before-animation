@@ -1,0 +1,201 @@
+(defvar expanded false)
+
+(defpoll clock :interval "1s"
+  `~/.config/eww/pink-capsule/status.sh clock`)
+
+(defpoll battery :interval "10s"
+  `~/.config/eww/pink-capsule/status.sh battery`)
+
+(defpoll wifi-name :interval "5s"
+  `~/.config/eww/pink-capsule/status.sh wifi`)
+
+(defpoll bt-status :interval "5s"
+  `~/.config/eww/pink-capsule/status.sh bluetooth`)
+
+(defpoll volume :interval "2s"
+  `~/.config/eww/pink-capsule/status.sh volume`)
+
+(defpoll song-title :interval "2s"
+  `~/.config/eww/pink-capsule/status.sh title`)
+
+(defpoll song-artist :interval "2s"
+  `~/.config/eww/pink-capsule/status.sh artist`)
+
+(defpoll song-status :interval "1s"
+  `~/.config/eww/pink-capsule/status.sh playing`)
+
+(defpoll disc :interval "1s"
+  `~/.config/eww/pink-capsule/status.sh disc`)
+
+(defpoll workspace :interval "2s"
+  `~/.config/eww/pink-capsule/status.sh workspace`)
+
+(defwidget capsule []
+  (eventbox
+    :onhover "eww -c ~/.config/eww/pink-capsule update expanded=true"
+    :onhoverlost "eww -c ~/.config/eww/pink-capsule update expanded=false"
+    (box
+      :class "capsule"
+      :orientation "h"
+      :space-evenly false
+      :spacing 4
+
+      (revealer
+        :transition "slideright"
+        :duration "450ms"
+        :reveal expanded
+        (box :orientation "h" :spacing 5
+          (button :class "module"
+            :onclick "~/.config/eww/pink-capsule/action.sh workspace-prev" "‹")
+          (button :class "module"
+            :onclick "~/.config/eww/pink-capsule/action.sh workspace-next"
+            "WS ${workspace}")
+          (button :class "module"
+            :onclick "~/.config/eww/pink-capsule/action.sh wifi" "󰖩")
+          (button :class "module"
+            :onclick "~/.config/eww/pink-capsule/action.sh bluetooth" "󰂯")
+          (button :class "module"
+            :onclick "~/.config/eww/pink-capsule/action.sh volume-mute" "󰕾")
+          (label :class "small-info" :text "${volume}%")
+        )
+      )
+
+      (button :class "disc"
+        :onclick "~/.config/eww/pink-capsule/action.sh music"
+        disc)
+
+      (label :class "heart" :text "♥")
+
+      (label :class "battery" :text "BATTERY ${battery}%")
+
+      (button :class "clock"
+        :onclick "~/.config/eww/pink-capsule/action.sh calendar"
+        clock)
+
+      (label :class "heart" :text "♥")
+
+      (revealer
+        :transition "slideleft"
+        :duration "450ms"
+        :reveal expanded
+        (box :orientation "h" :spacing 5
+          (button :class "module"
+            :onclick "~/.config/eww/pink-capsule/action.sh prev" "󰒮")
+          (button :class "module"
+            :onclick "~/.config/eww/pink-capsule/action.sh play"
+            {song-status == "Playing" ? "󰏤" : "󰐊"})
+          (button :class "module"
+            :onclick "~/.config/eww/pink-capsule/action.sh next" "󰒭")
+          (button :class "module"
+            :onclick "~/.config/eww/pink-capsule/action.sh notifications" "󰂚")
+          (button :class "module"
+            :onclick "~/.config/eww/pink-capsule/action.sh settings" "󰒓")
+        )
+      )
+    )
+  )
+)
+
+(defwindow capsule-window
+  :monitor 0
+  :geometry (geometry
+    :x "0px"
+    :y "5px"
+    :width "950px"
+    :height "45px"
+    :anchor "top center")
+  :stacking "fg"
+  :exclusive false
+  (box :halign "center" :valign "center"
+    (capsule)))
+
+(defwindow calendar-popup
+  :monitor 0
+  :geometry (geometry
+    :x "0px"
+    :y "58px"
+    :width "330px"
+    :height "340px"
+    :anchor "top center")
+  :stacking "fg"
+  :exclusive false
+  (box :class "popup" :orientation "v" :spacing 12
+    (label :class "popup-title" :text "CALENDAR")
+    (calendar :class "calendar")
+    (button :class "close"
+      :onclick "eww -c ~/.config/eww/pink-capsule close calendar-popup"
+      "Close")
+  )
+)
+
+(defwindow music-popup
+  :monitor 0
+  :geometry (geometry
+    :x "0px"
+    :y "58px"
+    :width "360px"
+    :height "175px"
+    :anchor "top center")
+  :stacking "fg"
+  :exclusive false
+  (box :class "popup" :orientation "v" :spacing 10
+    (label :class "popup-title" :text "♫ NOW PLAYING")
+    (label :class "song-title" :text song-title)
+    (label :class "song-artist" :text song-artist)
+    (box :orientation "h" :halign "center" :spacing 18
+      (button :onclick "~/.config/eww/pink-capsule/action.sh prev" "󰒮")
+      (button :onclick "~/.config/eww/pink-capsule/action.sh play"
+        {song-status == "Playing" ? "󰏤" : "󰐊"})
+      (button :onclick "~/.config/eww/pink-capsule/action.sh next" "󰒭")
+    )
+    (button :class "close"
+      :onclick "eww -c ~/.config/eww/pink-capsule close music-popup"
+      "Close")
+  )
+)
+
+(defwindow wifi-popup
+  :monitor 0
+  :geometry (geometry
+    :x "0px"
+    :y "58px"
+    :width "300px"
+    :height "170px"
+    :anchor "top center")
+  :stacking "fg"
+  :exclusive false
+  (box :class "popup" :orientation "v" :spacing 10
+    (label :class "popup-title" :text "󰖩  WI-FI")
+    (label :text wifi-name)
+    (button :onclick "~/.config/eww/pink-capsule/action.sh wifi-toggle"
+      "Toggle Wi-Fi")
+    (button :onclick "~/.config/eww/pink-capsule/action.sh network-settings"
+      "Network settings")
+    (button :class "close"
+      :onclick "eww -c ~/.config/eww/pink-capsule close wifi-popup"
+      "Close")
+  )
+)
+
+(defwindow bluetooth-popup
+  :monitor 0
+  :geometry (geometry
+    :x "0px"
+    :y "58px"
+    :width "300px"
+    :height "170px"
+    :anchor "top center")
+  :stacking "fg"
+  :exclusive false
+  (box :class "popup" :orientation "v" :spacing 10
+    (label :class "popup-title" :text "󰂯  BLUETOOTH")
+    (label :text bt-status)
+    (button :onclick "~/.config/eww/pink-capsule/action.sh bluetooth-toggle"
+      "Toggle Bluetooth")
+    (button :onclick "~/.config/eww/pink-capsule/action.sh bluetooth-settings"
+      "Bluetooth devices")
+    (button :class "close"
+      :onclick "eww -c ~/.config/eww/pink-capsule close bluetooth-popup"
+      "Close")
+  )
+)

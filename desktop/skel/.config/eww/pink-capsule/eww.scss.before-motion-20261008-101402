@@ -1,0 +1,26 @@
+@import "wallpaper";
+* { all: unset; font-family: "LightOSNew12"; font-size: 12px; font-weight: bold; }
+window { background: transparent; }
+.capsule { background: rgba($accent, .88); color: $text; border: 1px solid $accent-soft; border-radius: 99px; padding: 4px 13px; min-height: 28px; box-shadow: 0 0 12px rgba($accent-soft,.35); transition: background-color 300ms ease; }
+.capsule:hover { background: rgba($accent,.97); }
+.capsule.breathe { border-color: $accent-soft; box-shadow: 0 0 20px rgba($accent-soft,.65); }
+.heart.glow { color: $text; text-shadow: 0 0 9px $accent-soft; }
+button { color: $text; border-radius: 18px; padding: 4px 7px; transition: background-color 220ms ease; }
+button:hover { background: rgba($accent-soft,.32); }
+.heart { color: $accent-soft; font-size: 18px; padding: 0 3px; }
+.disc { font-size: 20px; color: $accent-soft; }
+.disc:hover { background: rgba($accent-soft,.25); }
+.clock { font-size: 14px; }
+.battery { border-bottom: 2px solid $accent-soft; }
+.panel, .dashboard { background: rgba($ink,.87); color: $text; border: 1px solid $accent-soft; border-radius: 26px; padding: 18px; box-shadow: 0 0 22px rgba($accent,.35); }
+.card, .nav { background: rgba($accent,.32); border: 1px solid rgba($accent-soft,.45); border-radius: 20px; padding: 12px; }
+.heading { color: $accent-soft; font-size: 15px; }
+.song { font-size: 14px; }
+.subtext { opacity: .8; }
+.record { background: rgba($accent,.6); }
+.close { background: rgba($accent,.4); }
+scale trough { background: rgba($accent-deep,.65); min-height: 5px; min-width: 90px; border-radius: 20px; }
+scale highlight { background: $accent-soft; border-radius: 20px; }
+scale slider { background: $accent-soft; border-radius: 100%; min-width: 12px; min-height: 12px; }
+calendar { color: $text; }
+calendar:selected { background: $accent-soft; color: $ink; }

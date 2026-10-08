@@ -1,0 +1,56 @@
+(defvar expanded false)
+(defpoll clock :interval "1s" `~/.config/eww/pink-capsule/status.sh clock`)
+(defpoll battery :interval "10s" `~/.config/eww/pink-capsule/status.sh battery`)
+(defpoll volume :interval "3s" `~/.config/eww/pink-capsule/status.sh volume`)
+(defpoll wifi :interval "5s" `~/.config/eww/pink-capsule/status.sh wifi`)
+(defpoll playing :interval "2s" `~/.config/eww/pink-capsule/status.sh music`)
+(defpoll title :interval "3s" `~/.config/eww/pink-capsule/status.sh title`)
+(defpoll workspace :interval "2s" `~/.config/eww/pink-capsule/status.sh workspace`)
+
+(defwidget extra-left []
+  (box :class "extras" :orientation "h" :space-evenly false :spacing 2
+    (button :class "small" :onclick "~/.config/eww/pink-capsule/action.sh workspace-prev" "‹")
+    (button :class "small" :onclick "~/.config/eww/pink-capsule/action.sh workspace-next" "WS ${workspace}")
+    (button :class "icon-button" :onclick "~/.config/eww/pink-capsule/action.sh wifi"
+      (image :path "./assets/wifi-icon35.png" :image-width 18 :image-height 18))
+    (button :class "icon-button" :onclick "~/.config/eww/pink-capsule/action.sh bluetooth"
+      (image :path "./assets/bluetooth-icon22.png" :image-width 18 :image-height 18))))
+
+(defwidget extra-right []
+  (box :class "extras" :orientation "h" :space-evenly false :spacing 2
+    (button :class "small" :onclick "~/.config/eww/pink-capsule/action.sh prev" "󰒮")
+    (button :class "small" :onclick "~/.config/eww/pink-capsule/action.sh music" {playing == "Playing" ? "󰏤" : "󰐊"})
+    (button :class "small" :onclick "~/.config/eww/pink-capsule/action.sh next" "󰒭")
+    (button :class "small" :onclick "~/.config/eww/pink-capsule/action.sh volume" "󰕾 ${volume}%")
+    (button :class "icon-button" :onclick "~/.config/eww/pink-capsule/action.sh notifications"
+      (image :path "./assets/alerts.png" :image-width 17 :image-height 17))))
+
+(defwidget capsule []
+  (eventbox
+    :onhover "eww -c ~/.config/eww/pink-capsule update expanded=true"
+    :onhoverlost "eww -c ~/.config/eww/pink-capsule update expanded=false"
+    (box :class "outer" :orientation "h" :halign "center" :space-evenly false :spacing 3
+      (label :class "outer-heart" :text "♥")
+      (box :class "pill" :orientation "h" :space-evenly false :spacing 2
+        (revealer :transition "slideright" :duration "420ms" :reveal expanded
+          (extra-left))
+        (button :class "record-dot" :onclick "~/.config/eww/pink-capsule/action.sh settings" "●")
+        (label :class "inner-heart" :text "♥")
+        (box :orientation "v" :space-evenly false :spacing 0
+          (label :class "battery" :text "BATTERY ${battery}%")
+          (scale :class "battery-meter" :min 0 :max 100 :value {battery == "--" ? 0 : battery} :sensitive false))
+        (button :class "clock" :onclick "~/.config/eww/pink-capsule/action.sh calendar" clock)
+        (button :class "disc" :onclick "~/.config/eww/pink-capsule/action.sh music"
+          {playing == "Playing" ? "◉" : "◌"})
+        (revealer :transition "slideleft" :duration "420ms" :reveal expanded
+          (extra-right)))
+      (label :class "outer-heart" :text "♥"))))
+
+(defwindow capsule-window
+  :monitor 0
+  :geometry (geometry :x "0px" :y "0px" :width "690px" :height "44px" :anchor "top center")
+  :stacking "fg"
+  :exclusive false
+  :focusable false
+  (box :class "clear-root" :halign "center" :valign "center"
+    (capsule)))

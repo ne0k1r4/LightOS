@@ -22,7 +22,10 @@ hl.on("hyprland.start", function()
 
   hl.exec_cmd("copyq --start-server")
   hl.exec_cmd("swaync")
-  hl.exec_cmd("waybar")
+  -- LightOS Animated Capsule (default)
+  hl.exec_cmd("~/.config/eww/pink-capsule/start.sh")
+  -- Fallback: uncomment below and comment capsule to use waybar
+  -- hl.exec_cmd("waybar")
   -- hl.exec_cmd("~/.config/hypr/autoruns.sh")  -- file missing, disabled
   hl.exec_cmd("~/.config/Light/bday/bday")
 

@@ -1,0 +1,38 @@
+/* GENERATED from LightOS wallpaper-colors.css; do not edit */
+.light-panel, .popup, .control-center, .dashboard-panel {
+  background-color: rgba(30,30,46,0.93);
+  color: #ffffff;
+  border: 1px solid rgba(223,225,220,0.76);
+  border-radius: 22px;
+  box-shadow: 0 8px 22px rgba(88,81,69,0.42);
+}
+.light-panel .light-heading, .popup .popup-title,
+.control-center .popup-title, .dashboard-panel .popup-title { color: #dfe1dc; }
+.light-panel .light-sub, .popup .song-artist { color: #dfe1dc; }
+.light-panel button, .popup button, .control-center button, .dashboard-panel button {
+  color: #ffffff;
+  background-color: rgba(153,138,104,0.28);
+  border: 1px solid rgba(223,225,220,0.25);
+  border-radius: 13px;
+}
+.light-panel button:hover, .popup button:hover,
+.control-center button:hover, .dashboard-panel button:hover {
+  background-color: rgba(223,225,220,0.32);
+  border-color: #dfe1dc;
+}
+.light-panel scale trough, .popup scale trough {
+  background-color: rgba(88,81,69,0.52);
+  border-radius: 9px;
+}
+.light-panel scale highlight, .popup scale highlight {
+  background-color: #998a68;
+  border-radius: 9px;
+}
+.light-panel scale slider, .popup scale slider {
+  background-color: #dfe1dc;
+  border-radius: 100%;
+}
+.light-panel calendar, .popup calendar { color: #ffffff; }
+.light-panel calendar:selected, .popup calendar:selected {
+  background-color: #998a68; color: #ffffff;
+}

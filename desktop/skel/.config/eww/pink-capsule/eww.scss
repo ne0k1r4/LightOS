@@ -1,0 +1,124 @@
+/* Only this stylesheet is loaded. No inherited old theme overrides. */
+* { all: unset; font-family: "LightOSNew12", sans-serif; font-size: 12px; font-weight: bold; }
+window, window.background, .background, .clear-root, .outer {
+  background-color: transparent;
+  background-image: none;
+  border: 0;
+  box-shadow: none;
+}
+.outer { padding: 0 2px; }
+.pill {
+  min-height: 23px;
+  padding: 2px 7px;
+  background-color: rgba(184, 129, 184, 0.88);
+  border: 1px solid rgba(255, 225, 247, 0.65);
+  border-radius: 22px;
+  color: #fff5ff;
+  box-shadow: inset 0 1px rgba(255,255,255,0.35), 0 1px 7px rgba(248,155,223,0.35);
+}
+.pill:hover { background-color: rgba(195, 140, 195, 0.93); }
+button { background: transparent; color: #fff5fc; border: 0; border-radius: 14px; padding: 1px 3px; min-height: 0; }
+button:hover { background-color: rgba(255, 235, 255, 0.22); }
+.outer-heart { color: #ffd3fa; font-size: 19px; padding: 0 3px; text-shadow: 0 0 5px #f5a1f0; }
+.inner-heart { color: #ffe4ff; font-size: 12px; padding: 0 2px; }
+.record-dot { color: #ff336e; font-size: 19px; padding: 0 3px; text-shadow: 0 0 4px #ff4d84; }
+.battery { font-size: 11px; color: #fff8ff; }
+.battery-meter { min-height: 3px; min-width: 76px; padding: 0; margin: 0 0 1px 0; }
+.battery-meter trough { min-height: 3px; background-color: rgba(85,61,94,0.5); border-radius: 6px; }
+.battery-meter highlight { background-color: #8ef3ff; border-radius: 6px; }
+.battery-meter slider { min-width: 0; min-height: 0; background: transparent; border: 0; box-shadow: none; }
+.clock { font-size: 14px; color: #fffaff; padding: 1px 4px; text-shadow: 0 0 3px rgba(255,255,255,0.4); }
+.disc { font-size: 16px; color: #ffdef5; padding: 0 3px; }
+.extras { padding: 0 2px; }
+.small { font-size: 11px; padding: 2px 4px; }
+.icon-button { padding: 0 3px; }
+
+@import "dynamic";
+
+
+
+
+/* CAPSULE RAY V2 START */
+/* GTK-renderable artwork: no unsupported @keyframes. */
+.outer-heart {
+  color: #fff8ff;
+  font-size: 20px;
+  padding: 4px 10px;
+  background-image: url('assets/heart-halo.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 54px 42px;
+}
+.inner-heart {
+  color: #fff9ff;
+  font-size: 14px;
+  padding: 3px 7px;
+  background-image: url('assets/heart-halo.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 40px 32px;
+}
+/* The revealer clips the gradient as it opens, so the lit edge travels
+   outward in lockstep with the expanding left/right modules. */
+.extras {
+  border: 0;
+  box-shadow: none;
+  padding: 0 3px;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.ray-left {
+  background-image: url('assets/ray-left.svg');
+}
+.ray-right {
+  background-image: url('assets/ray-right.svg');
+}
+.pill:hover {
+  box-shadow: inset 0 1px rgba(255,255,255,.48), 0 0 12px rgba(255,105,211,.46);
+}
+/* CAPSULE RAY V2 END */
+
+
+
+
+
+
+
+/* LIGHTOS_MOTION_V5: image glow; preserves transparent root */
+.outer-heart-img { min-width: 34px; min-height: 34px; margin: 0 1px; }
+.pill { background-position: center; }
+/* LIGHTOS_FULL_MODULES_V1 */
+.light-panel { background-color: rgba(40,31,50,.95); border-radius: 22px; border: 1px solid rgba(235,205,240,.6); padding: 13px; color: #fff3fc; }
+.light-row { min-height: 28px; }
+.light-row button { border-radius: 13px; padding: 5px 8px; background-color: rgba(255,255,255,.1); }
+.light-row button:hover { background-color: rgba(255,255,255,.27); }
+.light-heading { font-size: 16px; }
+.light-sub { font-size: 11px; color: #dfc6df; }
+.light-row scale trough { min-height: 5px; min-width: 170px; background-color: rgba(255,255,255,.2); border-radius: 8px; }
+.light-row scale highlight { background-color: #efb5df; border-radius: 8px; }
+
+
+
+
+
+/* WALLPAPER_RAY_START */
+
+.ray-left, .ray-right {
+    background-image: linear-gradient(
+        to bottom,
+        rgba(223,225,220,0.08),
+        rgba(153,138,104,0.52)
+    );
+    border-bottom: 2px solid #998a68;
+    box-shadow:
+        0 2px 6px rgba(153,138,104,0.65),
+        0 4px 12px rgba(88,81,69,0.35);
+}
+
+.outer-heart-img {
+    -gtk-icon-shadow: 0 0 7px #dfe1dc;
+}
+
+/* WALLPAPER_RAY_END */
+
+@import "popup-palette";

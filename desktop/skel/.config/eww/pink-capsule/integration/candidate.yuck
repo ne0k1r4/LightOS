@@ -1,0 +1,134 @@
+;; LIGHTOS_MOTION_V5
+(defpoll motionheart :interval "85ms" `~/.config/eww/pink-capsule/fx/motion/frame.py heart`)
+(defpoll motionray :interval "35ms" `~/.config/eww/pink-capsule/fx/motion/frame.py ray`)
+(defvar expanded false)
+;; HEART_RAY_START
+(defpoll heart-frame :interval "90ms" `~/.config/eww/pink-capsule/fx/state.sh frame`)
+(defpoll ray-progress :interval "40ms" `~/.config/eww/pink-capsule/fx/state.sh ray`)
+;; HEART_RAY_END
+(defpoll clock :interval "1s" `~/.config/eww/pink-capsule/status.sh clock`)
+(defpoll battery :interval "10s" `~/.config/eww/pink-capsule/status.sh battery`)
+(defpoll volume :interval "3s" `~/.config/eww/pink-capsule/status.sh volume`)
+(defpoll wifi :interval "5s" `~/.config/eww/pink-capsule/status.sh wifi`)
+(defpoll playing :interval "2s" `~/.config/eww/pink-capsule/status.sh music`)
+(defpoll title :interval "3s" `~/.config/eww/pink-capsule/status.sh title`)
+(defpoll workspace :interval "2s" `~/.config/eww/pink-capsule/status.sh workspace`)
+
+(defwidget extra-left []
+  (box :class "extras ray-left" :orientation "h" :space-evenly false :spacing 2
+    (button :class "small" :onclick "~/.config/eww/pink-capsule/action.sh workspace-prev" "‹")
+    (button :class "small" :onclick "~/.config/eww/pink-capsule/action.sh workspace-next" "WS ${workspace}")
+    (button :class "icon-button" :onclick "~/.config/eww/pink-capsule/action.sh wifi"
+      (image :path "./assets/wifi-icon35.png" :image-width 18 :image-height 18))
+    (button :class "icon-button" :onclick "~/.config/eww/pink-capsule/action.sh bluetooth"
+      (image :path "./assets/bluetooth-icon22.png" :image-width 18 :image-height 18))))
+
+(defwidget extra-right []
+  (box :class "extras ray-right" :orientation "h" :space-evenly false :spacing 2
+    (button :class "small" :onclick "~/.config/eww/pink-capsule/action.sh prev" "󰒮")
+    (button :class "small" :onclick "~/.config/eww/pink-capsule/action.sh music" {playing == "Playing" ? "󰏤" : "󰐊"})
+    (button :class "small" :onclick "~/.config/eww/pink-capsule/action.sh next" "󰒭")
+    (button :class "small" :onclick "~/.config/eww/pink-capsule/action.sh volume" "󰕾 ${volume}%")
+    (button :class "icon-button" :onclick "~/.config/eww/pink-capsule/action.sh notifications"
+      (image :path "./assets/alerts.png" :image-width 17 :image-height 17))
+    (button :class "small" :onclick "eww -c ~/.config/eww/pink-capsule open --toggle lightos-modules-popup" "󰍜")))
+
+(defwidget capsule []
+  (eventbox
+    :onhover "~/.config/eww/pink-capsule/fx/motion/state.sh enter"
+    :onhoverlost "~/.config/eww/pink-capsule/fx/motion/state.sh leave"
+    (box :class "outer" :orientation "h" :halign "center" :space-evenly false :spacing 3
+      (image :class "outer-heart-img" :path motionheart :image-width 34 :image-height 34)
+      (box :class "pill" :style "background-image: url(${motionray}); background-repeat: no-repeat; background-size: 100% 100%;" :orientation "h" :space-evenly false :spacing 2
+        (revealer :transition "slideright" :duration "360ms" :reveal expanded
+          (extra-left))
+        (button :class "record-dot" :onclick "~/.config/eww/pink-capsule/action.sh settings" "●")
+        (label :class "inner-heart" :text "♥")
+        (box :orientation "v" :space-evenly false :spacing 0
+          (label :class "battery" :text "BATTERY ${battery}%")
+          (scale :class "battery-meter" :min 0 :max 100 :value {battery == "--" ? 0 : battery} :sensitive false))
+        (button :class "clock" :onclick "~/.config/eww/pink-capsule/action.sh calendar" clock)
+        (button :class "disc" :onclick "~/.config/eww/pink-capsule/action.sh music"
+          {playing == "Playing" ? "◉" : "◌"})
+        (revealer :transition "slideleft" :duration "360ms" :reveal expanded
+          (extra-right)))
+      (image :class "outer-heart-img" :path motionheart :image-width 34 :image-height 34))))
+
+(defwindow capsule-window
+  :monitor 0
+  :geometry (geometry :x "0px" :y "0px" :width "690px" :height "44px" :anchor "top center")
+  :stacking "fg"
+  :exclusive false
+  :focusable false
+  (box :class "clear-root" :halign "center" :valign "center"
+    (capsule)))
+
+;; LIGHTOS_FULL_MODULES_V1
+(defpoll light-temp :interval "5s" `~/.config/eww/pink-capsule/integration/status.sh temp`)
+(defpoll light-window :interval "2s" `~/.config/eww/pink-capsule/integration/status.sh window`)
+(defpoll light-bright :interval "5s" `~/.config/eww/pink-capsule/integration/status.sh bright`)
+(defpoll light-bt :interval "5s" `~/.config/eww/pink-capsule/integration/status.sh bluetooth`)
+(defpoll light-mem :interval "5s" `~/.config/eww/pink-capsule/integration/status.sh memory`)
+(defpoll light-rec :interval "3s" `~/.config/eww/pink-capsule/integration/status.sh recorder`)
+(defpoll light-artist :interval "3s" `~/.config/eww/pink-capsule/integration/status.sh artist`)
+
+(defwidget light-icon [asset action]
+  (button :class "light-icon" :onclick action
+    (image :path asset :image-width 22 :image-height 22)))
+
+(defwidget light-panel []
+ (box :class "light-panel" :orientation "v" :spacing 7
+  (box :class "light-row" :orientation "h" :spacing 6
+   (eventbox :onrightclick "~/.config/eww/pink-capsule/integration/action.sh logo-right"
+    (button :onclick "~/.config/eww/pink-capsule/integration/action.sh logo"
+      (image :path "./assets/lightlogopink3.png" :image-width 24 :image-height 24)))
+   (label :class "light-heading" :text "LIGHTOS • ${workspace}")
+   (button :onclick "eww -c ~/.config/eww/pink-capsule close lightos-modules-popup" "✕"))
+  (label :class "light-sub" :text light-window :limit-width 46)
+  (box :class "light-row" :orientation "h" :spacing 8
+   (eventbox :onrightclick "~/.config/eww/pink-capsule/integration/action.sh wifi-right"
+     (light-icon :asset "./assets/wifi-icon35.png" :action "~/.config/eww/pink-capsule/integration/action.sh wifi"))
+   (eventbox :onrightclick "~/.config/eww/pink-capsule/integration/action.sh bluetooth-right"
+     (light-icon :asset "./assets/bluetooth-icon22.png" :action "~/.config/eww/pink-capsule/integration/action.sh bluetooth"))
+   (light-icon :asset "./assets/audio-headphones.png" :action "~/.config/eww/pink-capsule/integration/action.sh audio")
+   (light-icon :asset "./assets/sun.png" :action "~/.config/eww/pink-capsule/integration/action.sh bright-up")
+   (light-icon :asset "./assets/setting.png" :action "~/.config/eww/pink-capsule/integration/action.sh settings")
+   (light-icon :asset "./assets/alerts.png" :action "~/.config/eww/pink-capsule/integration/action.sh notifications"))
+  (box :class "light-row" :orientation "h" :spacing 6
+   (label :text "Wi-Fi: ${wifi}")
+   (label :text "BT: ${light-bt}")
+   (label :text "BAT: ${battery}%"))
+  (box :class "light-row" :orientation "h" :spacing 6
+   (label :text "󰕾 ${volume}%")
+   (scale :min 0 :max 100 :value volume
+      :onchange "~/.config/eww/pink-capsule/integration/action.sh audio-set {}"))
+  (box :class "light-row" :orientation "h" :spacing 6
+   (label :text "☀ ${light-bright}%")
+   (scale :min 0 :max 100 :value {light-bright == "" ? 0 : light-bright}
+      :onchange "~/.config/eww/pink-capsule/integration/action.sh bright-set {}"))
+  (box :class "light-row" :orientation "h" :spacing 6
+   (label :text "󰍛 ${light-mem}")
+   (label :text "TEMP ${light-temp}"))
+  (box :class "light-row" :orientation "h" :spacing 6
+   (eventbox :onrightclick "~/.config/eww/pink-capsule/integration/action.sh music-right"
+     (button :onclick "~/.config/eww/pink-capsule/integration/action.sh music" "♫ ${title}"))
+   (label :text light-artist :limit-width 18))
+  (box :class "light-row" :orientation "h" :spacing 6
+   (button :onclick "~/.config/eww/pink-capsule/integration/action.sh prev" "󰒮")
+   (button :onclick "~/.config/eww/pink-capsule/integration/action.sh music" "󰐊 / 󰏤")
+   (button :onclick "~/.config/eww/pink-capsule/integration/action.sh next" "󰒭")
+   (button :onclick "~/.config/eww/pink-capsule/integration/action.sh recorder" "REC ${light-rec}"))
+  (box :class "light-row" :orientation "h" :spacing 6
+   (eventbox :onrightclick "~/.config/eww/pink-capsule/integration/action.sh wallpaper-right"
+    (button :onclick "~/.config/eww/pink-capsule/integration/action.sh wallpaper" "Wallpaper"))
+   (button :onclick "~/.config/eww/pink-capsule/integration/action.sh special" "Special WS")
+   (button :onclick "~/.config/eww/pink-capsule/integration/action.sh calendar" "Calendar")
+   (eventbox :onrightclick "~/.config/eww/pink-capsule/integration/action.sh notifications-right"
+     (button :onclick "~/.config/eww/pink-capsule/integration/action.sh notifications" "Notifications")))
+ ))
+
+(defwindow lightos-modules-popup
+ :monitor 0
+ :geometry (geometry :x "0px" :y "52px" :width "425px" :height "365px" :anchor "top center")
+ :stacking "fg" :exclusive false :focusable false
+ (light-panel))
