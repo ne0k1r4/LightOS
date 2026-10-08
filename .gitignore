@@ -36,3 +36,16 @@ desktop/skel/.config/eww/pink-capsule/.motion-state
 desktop/skel/.config/eww/pink-capsule/backups/
 desktop/skel/.config/eww/pink-capsule/fx/hover.state
 desktop/skel/.config/eww/pink-capsule/fx/motion/start
+
+# LightOS capsule runtime and backup files
+desktop/skel/.config/eww/pink-capsule/backups/
+desktop/skel/.config/eww/pink-capsule/__pycache__/
+desktop/skel/.config/eww/pink-capsule/**/__pycache__/
+desktop/skel/.config/eww/pink-capsule/**/*.pyc
+desktop/skel/.config/eww/pink-capsule/*.bak
+desktop/skel/.config/eww/pink-capsule/*.before-*
+desktop/skel/.config/eww/pink-capsule/.motion-state
+desktop/skel/.config/eww/pink-capsule/**/*.pid
+desktop/skel/.config/eww/pink-capsule/**/hover.state
+desktop/skel/.config/eww/pink-capsule/**/last-backup-path
+desktop/skel/.config/eww/pink-capsule/**/backup-path

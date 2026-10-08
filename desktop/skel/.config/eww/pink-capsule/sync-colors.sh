@@ -54,3 +54,6 @@ if not output.exists() or output.read_text() != css:
     output.write_text(css)
     print("Capsule colors updated:", accent, soft)
 PY
+
+# LIGHTOS_FINAL_MOTION_SYNC
+python3 "$HOME/.config/eww/pink-capsule/visualizer/sync-spectrum.py" "$HOME/.config/eww/pink-capsule/_final-motion-spectrum.scss"

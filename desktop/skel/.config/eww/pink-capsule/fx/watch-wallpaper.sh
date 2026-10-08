@@ -14,6 +14,7 @@ while sleep 2; do
         last="$current"
         "$D/sync-colors.sh"
         python3 "$D/fx/sync-rofi-colors.py"
+        "$D/visualizer/sync-color.sh"
         eww -c "$D" reload
     fi
 done

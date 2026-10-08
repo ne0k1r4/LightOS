@@ -1,3 +1,7 @@
+;; LIGHTOS_CAPSULE_SPECTRUM_V1
+(deflisten spectrum :initial "[4,4,4,4,4,4,4,4,4,4,4,4]"
+  `~/.config/eww/pink-capsule/visualizer/spectrum.sh`)
+
 ;; LIGHTOS_MOTION_V5
 (defpoll motionheart :interval "85ms" `~/.config/eww/pink-capsule/fx/motion/frame.py heart`)
 (defpoll motionray :interval "35ms" `~/.config/eww/pink-capsule/fx/motion/frame.py ray`)
@@ -25,6 +29,9 @@
 
 (defwidget extra-right []
   (box :class "extras ray-right" :orientation "h" :space-evenly false :spacing 2
+    (box :class "capsule-spectrum" :orientation "h" :space-evenly false :spacing 2 :valign "center"
+      (for bar in spectrum
+        (box :class "capsule-spectrum-bar" :valign "end" :style "min-height: ${bar}px;")))
     (button :class "small" :onclick "~/.config/eww/pink-capsule/action.sh prev" "󰒮")
     (button :class "small" :onclick "~/.config/eww/pink-capsule/action.sh music" {playing == "Playing" ? "󰏤" : "󰐊"})
     (button :class "small" :onclick "~/.config/eww/pink-capsule/action.sh next" "󰒭")
