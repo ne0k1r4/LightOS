@@ -90,6 +90,19 @@ if [[ -d "$ROOT/components" ]]; then
     done
 fi
 
+
+# LIGHTOS_HYBRID_VISUALIZER_INSTALL
+hybrid_installer="$ROOT/components/LightOS-Widgets/visualizer/hybrid/install.sh"
+
+if [[ -f "$hybrid_installer" ]]; then
+    echo "Installing LightOS Hybrid Holographic Visualizer"
+    bash "$hybrid_installer"
+else
+    echo "Hybrid visualizer source missing." >&2
+    echo "Clone LightOS with --recurse-submodules." >&2
+    exit 1
+fi
+
 if [[ "$WITH_GRUB" == true ]]; then
     echo 'Installing the optional LightOS GRUB theme.'
     "$ROOT/system/grub/install-theme.sh"
