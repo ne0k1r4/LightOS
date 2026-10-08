@@ -133,3 +133,12 @@ if [ -f "$HOME/.config/systemd/user/lightos-pill-notifications.service" ]; then
             2>/dev/null || true
     fi
 fi
+
+# LIGHTOS_NOTIFICATION_SOUND_INSTALL
+notification_installer="$ROOT/components/LightOS-Assets/assets/notifications/install.sh"
+
+if [[ -f "$notification_installer" ]]; then
+    bash "$notification_installer"
+else
+    echo "Optional LightOS notification sound not found." >&2
+fi
