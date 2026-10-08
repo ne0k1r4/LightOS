@@ -5,7 +5,7 @@
 --]]
 
 hl.on("hyprland.start", function()
-  hl.exec_cmd("systemctl --user start wallpaper-auto.service")
+  -- hl.exec_cmd("systemctl --user start wallpaper-auto.service")
   hl.exec_cmd("hyprctl setcursor 'LightOS-Cursor' 44")
   -- DROPPED: original had this same setcursor line twice (once as exec-once,
   -- once as plain exec) back to back -- redundant, collapsed to one call.
@@ -22,10 +22,7 @@ hl.on("hyprland.start", function()
 
   hl.exec_cmd("copyq --start-server")
   hl.exec_cmd("swaync")
-  -- LightOS Animated Capsule (default)
   hl.exec_cmd("~/.config/eww/pink-capsule/start.sh")
-  -- Fallback: uncomment below and comment capsule to use waybar
-  -- hl.exec_cmd("waybar")
   -- hl.exec_cmd("~/.config/hypr/autoruns.sh")  -- file missing, disabled
   hl.exec_cmd("~/.config/Light/bday/bday")
 
@@ -37,12 +34,12 @@ hl.on("hyprland.start", function()
 
   hl.exec_cmd("~/.config/hypr/Scripts/album_waybar.sh")
 
-  hl.exec_cmd("awww init && awww-daemon")
+  hl.exec_cmd("sh -c 'pgrep -x awww-daemon >/dev/null || awww-daemon'")
 
   hl.exec_cmd("gsr-ui")
   hl.exec_cmd("fcitx5")
   hl.exec_cmd("~/bin/ws-preview-recorder.sh")
-  hl.exec_cmd("wallpaper-switch.sh")
+  hl.exec_cmd("sh -c 'for i in $(seq 1 20); do awww query >/dev/null 2>&1 && break; sleep 0.5; done; wallpaper-switch.sh'")
 
   -- Commented-out swww one-liner in original, kept inert:
   -- hl.exec_cmd([[swww img --transition-type grow --transition-step 10 --transition-fps 60 "$(find ~/.config/Light/wallpaper -maxdepth 1 -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' \) | shuf -n 1)"]])
@@ -51,3 +48,4 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("~/.config/Light/widgets/clock_widget")
   hl.exec_cmd("~/bin/welcome.sh")
 end)
+

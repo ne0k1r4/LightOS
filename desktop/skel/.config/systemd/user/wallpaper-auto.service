@@ -1,0 +1,10 @@
+[Unit]
+Description=LightOS hourly wallpaper switch (Awww)
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+Environment=PATH=%h/.local/bin:%h/bin:/usr/local/bin:/usr/bin
+ExecStart=%h/.config/Light/wallpaper/wallpaper-switch.sh
+StandardOutput=journal
+StandardError=journal
