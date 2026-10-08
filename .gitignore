@@ -24,3 +24,15 @@ __pycache__/
 =======
 *.o
 /light-launcher
+
+# LightOS capsule runtime state
+desktop/skel/.config/eww/pink-capsule/.motion-state
+desktop/skel/.config/eww/pink-capsule/backups/
+desktop/skel/.config/eww/pink-capsule/fx/hover.state
+desktop/skel/.config/eww/pink-capsule/fx/motion/start
+
+# LightOS capsule runtime state
+desktop/skel/.config/eww/pink-capsule/.motion-state
+desktop/skel/.config/eww/pink-capsule/backups/
+desktop/skel/.config/eww/pink-capsule/fx/hover.state
+desktop/skel/.config/eww/pink-capsule/fx/motion/start

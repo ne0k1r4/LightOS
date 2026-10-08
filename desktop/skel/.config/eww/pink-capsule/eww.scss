@@ -101,24 +101,45 @@ button:hover { background-color: rgba(255, 235, 255, 0.22); }
 
 
 
+
+
+@import "popup-palette";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* WALLPAPER_RAY_START */
 
 .ray-left, .ray-right {
     background-image: linear-gradient(
         to bottom,
-        rgba(223,225,220,0.08),
-        rgba(153,138,104,0.52)
+        rgba(194,186,208,0.08),
+        rgba(9,7,42,0.52)
     );
-    border-bottom: 2px solid #998a68;
+    border-bottom: 2px solid #09072a;
     box-shadow:
-        0 2px 6px rgba(153,138,104,0.65),
-        0 4px 12px rgba(88,81,69,0.35);
+        0 2px 6px rgba(9,7,42,0.65),
+        0 4px 12px rgba(10,11,36,0.35);
 }
 
 .outer-heart-img {
-    -gtk-icon-shadow: 0 0 7px #dfe1dc;
+    -gtk-icon-shadow: 0 0 7px #c2bad0;
 }
 
 /* WALLPAPER_RAY_END */
-
-@import "popup-palette";

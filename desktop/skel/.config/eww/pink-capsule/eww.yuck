@@ -56,7 +56,7 @@
 
 (defwindow capsule-window
   :monitor 0
-  :geometry (geometry :x "0px" :y "0px" :width "690px" :height "44px" :anchor "top center")
+  :geometry (geometry :x "0px" :y "5px" :width "690px" :height "48px" :anchor "top center")
   :stacking "fg"
   :exclusive false
   :focusable false
