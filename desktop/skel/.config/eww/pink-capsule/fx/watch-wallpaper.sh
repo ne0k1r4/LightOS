@@ -1,18 +1,19 @@
 #!/usr/bin/env bash
 
 D="$HOME/.config/eww/pink-capsule"
-P="$HOME/.config/waybar/wallpaper-colors.css"
+SOURCE="$HOME/.config/waybar/wallpaper-colors.css"
 
 last=""
 
-while sleep 3; do
-    [ -f "$P" ] || continue
+while sleep 2; do
+    [ -f "$SOURCE" ] || continue
 
-    current=$(sha256sum "$P" | cut -d' ' -f1)
+    current=$(sha256sum "$SOURCE" | cut -d' ' -f1)
 
     if [ "$current" != "$last" ]; then
         last="$current"
-        python3 "$D/fx/wallpaper-ray.py"
+        "$D/sync-colors.sh"
+        python3 "$D/fx/sync-rofi-colors.py"
         eww -c "$D" reload
     fi
 done

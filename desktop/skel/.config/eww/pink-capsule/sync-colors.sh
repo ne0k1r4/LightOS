@@ -1,24 +1,56 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -e
+
 D="$HOME/.config/eww/pink-capsule"
-SRC="$HOME/.config/waybar/wallpaper-colors.css"
-[ -f "$SRC" ] || exit 0
-python3 - "$SRC" "$D/_dynamic.scss" <<'PY'
-import re,sys
+SOURCE="$HOME/.config/waybar/wallpaper-colors.css"
+OUTPUT="$D/_dynamic.scss"
+
+[ -f "$SOURCE" ] || exit 0
+
+python3 - "$SOURCE" "$OUTPUT" <<'PY'
+import re
+import sys
 from pathlib import Path
-s=Path(sys.argv[1]).read_text()
-d={k:v for k,v in re.findall(r'@define-color\s+([\w-]+)\s+(#[0-9A-Fa-f]{3,8})\s*;',s)}
-a=d.get('wallpaper_accent','#b881b8')
-soft=d.get('wallpaper_accent_soft','#ffddf7')
-ink=d.get('wallpaper_text','#fffaff')
-def rgba(v,opacity):
-    h=v.lstrip('#')
-    if len(h)==3: h=''.join(x*2 for x in h)
-    if len(h)<6: return 'rgba(184,129,184,0.88)'
-    return f'rgba({int(h[:2],16)}, {int(h[2:4],16)}, {int(h[4:6],16)}, {opacity})'
-Path(sys.argv[2]).write_text(
-    f".pill {{ background-color: {rgba(a,0.88)}; border-color: {rgba(soft,0.65)}; }}\n"
-    f".outer-heart {{ color: {soft}; }}\n"
-    f".battery, .clock {{ color: {ink}; }}\n"
-)
+
+source = Path(sys.argv[1]).read_text()
+output = Path(sys.argv[2])
+
+def get(name, default):
+    match = re.search(
+        r'@define-color\s+' + re.escape(name) +
+        r'\s+(#[0-9a-fA-F]{6})\s*;',
+        source
+    )
+    return match.group(1) if match else default
+
+def rgba(hex_color, alpha):
+    r, g, b = (
+        int(hex_color[i:i+2], 16)
+        for i in (1, 3, 5)
+    )
+    return f"rgba({r}, {g}, {b}, {alpha})"
+
+accent = get("wallpaper_accent", "#b881b8")
+soft = get("wallpaper_accent_soft", "#f5d2ed")
+text = get("wallpaper_text", "#ffffff")
+
+css = f"""
+.pill {{
+    background-color: {rgba(accent, 0.88)};
+    border-color: {rgba(soft, 0.65)};
+}}
+
+.pill:hover {{
+    background-color: {rgba(accent, 0.95)};
+}}
+
+.battery, .clock {{
+    color: {text};
+}}
+"""
+
+# Avoid unnecessary writes and reloads
+if not output.exists() or output.read_text() != css:
+    output.write_text(css)
+    print("Capsule colors updated:", accent, soft)
 PY

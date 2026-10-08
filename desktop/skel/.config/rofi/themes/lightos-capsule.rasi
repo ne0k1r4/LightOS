@@ -1,0 +1,40 @@
+
+* {
+    background: #1e1e2eee;
+    foreground: #ffffff;
+    accent: #020202;
+    border-color: #a9a9a9;
+}
+
+window {
+    location: north;
+    anchor: north;
+    x-offset: 0px;
+    y-offset: 58px;
+    width: 310px;
+    border: 1px;
+    border-radius: 18px;
+    background-color: @background;
+}
+
+mainbox {
+    padding: 12px;
+    spacing: 8px;
+    background-color: transparent;
+}
+
+listview {
+    lines: 6;
+    spacing: 5px;
+    background-color: transparent;
+}
+
+element {
+    padding: 8px;
+    border-radius: 10px;
+}
+
+element selected {
+    background-color: @accent;
+    text-color: #ffffff;
+}

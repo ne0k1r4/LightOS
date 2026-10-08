@@ -33,7 +33,6 @@ button:hover { background-color: rgba(255, 235, 255, 0.22); }
 .small { font-size: 11px; padding: 2px 4px; }
 .icon-button { padding: 0 3px; }
 
-@import "dynamic";
 
 
 
@@ -124,22 +123,131 @@ button:hover { background-color: rgba(255, 235, 255, 0.22); }
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* LightOS wallpaper colors - final override */
+
+
+
+
+@import "dynamic";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* WALLPAPER_RAY_START */
 
 .ray-left, .ray-right {
     background-image: linear-gradient(
         to bottom,
-        rgba(194,186,208,0.08),
-        rgba(9,7,42,0.52)
+        rgba(169,169,169,0.08),
+        rgba(2,2,2,0.52)
     );
-    border-bottom: 2px solid #09072a;
+    border-bottom: 2px solid #020202;
     box-shadow:
-        0 2px 6px rgba(9,7,42,0.65),
-        0 4px 12px rgba(10,11,36,0.35);
+        0 2px 6px rgba(2,2,2,0.65),
+        0 4px 12px rgba(7,8,14,0.35);
 }
 
 .outer-heart-img {
-    -gtk-icon-shadow: 0 0 7px #c2bad0;
+    -gtk-icon-shadow: 0 0 7px #a9a9a9;
 }
 
 /* WALLPAPER_RAY_END */
