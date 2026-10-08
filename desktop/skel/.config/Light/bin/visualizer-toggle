@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+HYBRID="$HOME/.local/bin/lightos-hybrid-visualizer"
+
+if [[ ! -x "$HYBRID" ]]; then
+    echo "Hybrid visualizer executable missing: $HYBRID" >&2
+    exit 1
+fi
+
+# Stop only the desktop hybrid visualizer.
+if pgrep -f -x "$HYBRID" >/dev/null 2>&1; then
+    pkill -TERM -f -x "$HYBRID" || true
+    exit 0
+fi
+
+# Stop an old LightOS desktop visualizer if present.
+for mode in light dark; do
+    OLD="$HOME/.config/Light/widgets/visualizer/$mode/visualizer"
+    pkill -TERM -f -x "$OLD" 2>/dev/null || true
+done
+
+# Start independently so the clock widget doesn't block.
+nohup "$HYBRID" \
+    >/tmp/lightos-hybrid.log 2>&1 </dev/null &
