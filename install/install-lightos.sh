@@ -123,3 +123,13 @@ if [[ -d "$backup" ]]; then
     echo "Previous files were saved under $backup"
 fi
 echo "LightOS desktop files installed. Review README.md for optional service setup."
+
+# LIGHTOS_PILL_NOTIFICATIONS_SERVICE
+# Enable the notification observer for the desktop user.
+if [ -f "$HOME/.config/systemd/user/lightos-pill-notifications.service" ]; then
+    if command -v systemctl >/dev/null 2>&1; then
+        systemctl --user daemon-reload 2>/dev/null || true
+        systemctl --user enable --now lightos-pill-notifications.service \
+            2>/dev/null || true
+    fi
+fi

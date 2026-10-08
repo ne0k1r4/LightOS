@@ -1,0 +1,10 @@
+[Unit]
+Description=LightOS capsule notification observer (SwayNC remains notification daemon)
+After=graphical-session.target
+[Service]
+Type=simple
+ExecStart=%h/.config/Light/bin/lightos-notification-bridge
+Restart=on-failure
+RestartSec=2
+[Install]
+WantedBy=default.target

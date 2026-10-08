@@ -1,3 +1,4 @@
+;; LIGHTOS_NOTIFICATIONS_V4
 ;; LIGHTOS_CAPSULE_SPECTRUM_V1
 (deflisten spectrum :initial "[4,4,4,4,4,4,4,4,4,4,4,4]"
   `~/.config/eww/pink-capsule/visualizer/spectrum.sh`)
@@ -6,6 +7,10 @@
 (defpoll motionheart :interval "85ms" `~/.config/eww/pink-capsule/fx/motion/frame.py heart`)
 (defpoll motionray :interval "35ms" `~/.config/eww/pink-capsule/fx/motion/frame.py ray`)
 (defvar expanded false)
+;; LIGHTOS_PILL_V2
+(defvar lightos_notice_active false)
+(defvar lightos_notice_title "")
+(defvar lightos_notice_body "")
 ;; HEART_RAY_START
 (defpoll heart-frame :interval "90ms" `~/.config/eww/pink-capsule/fx/state.sh frame`)
 (defpoll ray-progress :interval "40ms" `~/.config/eww/pink-capsule/fx/state.sh ray`)
@@ -35,8 +40,12 @@
     (button :class "small" :onclick "~/.config/eww/pink-capsule/action.sh prev" "󰒮")
     (button :class "small" :onclick "~/.config/eww/pink-capsule/action.sh music" {playing == "Playing" ? "󰏤" : "󰐊"})
     (button :class "small" :onclick "~/.config/eww/pink-capsule/action.sh next" "󰒭")
-    (button :class "small" :onclick "~/.config/eww/pink-capsule/action.sh volume" "󰕾 ${volume}%")
-    (button :class "icon-button" :onclick "~/.config/eww/pink-capsule/action.sh notifications"
+    (eventbox
+      :onscroll "~/.config/eww/pink-capsule/volume-control.sh {}"
+      (button :class "small"
+        :onclick "~/.config/eww/pink-capsule/action.sh volume"
+        "󰕾 ${volume}%"))
+    (button :class "icon-button" :onclick "swaync-client -t -sw"
       (image :path "./assets/alerts.png" :image-width 17 :image-height 17))
     (button :class "small" :onclick "eww -c ~/.config/eww/pink-capsule open --toggle lightos-modules-popup" "󰍜")))
 
@@ -49,14 +58,22 @@
       (box :class "pill" :style "background-image: url(${motionray}); background-repeat: no-repeat; background-size: 100% 100%;" :orientation "h" :space-evenly false :spacing 2
         (revealer :transition "slideright" :duration "360ms" :reveal expanded
           (extra-left))
-        (button :class "record-dot" :onclick "~/.config/eww/pink-capsule/action.sh settings" "●")
-        (label :class "inner-heart" :text "♥")
-        (box :orientation "v" :space-evenly false :spacing 0
-          (label :class "battery" :text "BATTERY ${battery}%")
-          (scale :class "battery-meter" :min 0 :max 100 :value {battery == "--" ? 0 : battery} :sensitive false))
-        (button :class "clock" :onclick "~/.config/eww/pink-capsule/action.sh calendar" clock)
-        (button :class "disc" :onclick "~/.config/eww/pink-capsule/action.sh music"
-          {playing == "Playing" ? "◉" : "◌"})
+        (revealer :transition "slideleft" :duration "240ms" :reveal {!lightos_notice_active}
+          (box :orientation "h" :space-evenly false :spacing 2
+            (button :class "record-dot" :onclick "~/.config/eww/pink-capsule/action.sh settings" "●")
+            (label :class "inner-heart" :text "♥")
+            (box :orientation "v" :space-evenly false :spacing 0
+              (label :class "battery" :text "BATTERY ${battery}%")
+              (scale :class "battery-meter" :min 0 :max 100 :value {battery == "--" ? 0 : battery} :sensitive false))
+            (button :class "clock" :onclick "~/.config/eww/pink-capsule/action.sh calendar" clock)
+            (button :class "disc" :onclick "~/.config/eww/pink-capsule/action.sh music"
+              {playing == "Playing" ? "◉" : "◌"})))
+        (revealer :transition "slideright" :duration "300ms" :reveal lightos_notice_active
+          (box :class "lightos-notice" :orientation "h" :space-evenly false :spacing 6
+            (label :class "lightos-notice-icon" :text "♥")
+            (box :orientation "v" :space-evenly false :spacing 0
+              (label :class "lightos-notice-title" :limit-width 28 :text lightos_notice_title)
+              (label :class "lightos-notice-body" :limit-width 43 :text lightos_notice_body))))
         (revealer :transition "slideleft" :duration "360ms" :reveal expanded
           (extra-right)))
       (image :class "outer-heart-img" :path motionheart :image-width 34 :image-height 34))))

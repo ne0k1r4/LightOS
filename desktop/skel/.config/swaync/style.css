@@ -364,3 +364,132 @@ scrollbar trough {
 .image {
   padding-right: 0.5rem;
 }
+
+/* LIGHTOS_COMPACT_MPRIS_START */
+
+.widget-mpris {
+  margin: 4px 0;
+  padding: 0;
+}
+
+.widget-mpris-player {
+  min-height: 112px;
+  margin: 5px 8px;
+  border-radius: 18px;
+  background-color: rgba(18, 16, 29, 0.82);
+  box-shadow: inset 0 0 0 1px rgba(235, 205, 255, 0.32);
+}
+
+.widget-mpris-album-art {
+  min-width: 72px;
+  min-height: 72px;
+  border-radius: 12px;
+  margin: 4px 8px;
+  box-shadow: none;
+}
+
+.mpris-overlay {
+  padding: 6px;
+  background-color: rgba(14, 12, 24, 0.30);
+}
+
+.widget-mpris-title {
+  font-size: 0.95rem;
+  padding: 3px 6px;
+  border-radius: 8px;
+}
+
+.widget-mpris-subtitle {
+  font-size: 0.78rem;
+  padding: 2px 6px;
+}
+
+.widget-mpris button {
+  min-width: 28px;
+  min-height: 28px;
+  margin: 0 3px;
+  box-shadow: none;
+}
+
+/* LIGHTOS_COMPACT_MPRIS_END */
+
+/* LIGHTOS_READABILITY_START */
+
+.control-center {
+  background-color: rgba(19, 17, 31, 0.88);
+  border-radius: 26px;
+  border: 1px solid rgba(220, 190, 255, 0.40);
+}
+
+.control-center .notification-background {
+  background-color: rgba(38, 32, 52, 0.78);
+  border-radius: 16px;
+}
+
+.notification-background .notification {
+  background-color: rgba(30, 25, 44, 0.88);
+}
+
+.notification-content .summary {
+  color: #ffffff;
+}
+
+.notification-content .body {
+  color: #e4dcec;
+}
+
+/* LIGHTOS_READABILITY_END */
+
+/* LIGHTOS_MPRIS_FINAL_START */
+
+.widget-mpris-player {
+  min-height: 100px;
+  background-color: rgba(24, 21, 38, 0.94);
+  background-image: none;
+  border-radius: 18px;
+  border: 1px solid rgba(230, 200, 255, 0.24);
+  box-shadow: none;
+}
+
+.widget-mpris-album-art {
+  opacity: 0;
+  min-height: 0;
+  min-width: 0;
+}
+
+.mpris-overlay {
+  background-color: transparent;
+}
+
+.widget-mpris-title {
+  font-size: 0.95rem;
+  color: #ffffff;
+  background-color: transparent;
+}
+
+.widget-mpris-subtitle {
+  font-size: 0.78rem;
+  color: #d7c7e5;
+  background-color: transparent;
+}
+
+/* LIGHTOS_MPRIS_FINAL_END */
+
+/* LIGHTOS_NOTIFICATION_TEXT_START */
+
+.notification-content .summary {
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.notification-content .body {
+  font-size: 0.82rem;
+  opacity: 0.85;
+}
+
+.notification-content .time {
+  font-size: 0.68rem;
+  opacity: 0.65;
+}
+
+/* LIGHTOS_NOTIFICATION_TEXT_END */
