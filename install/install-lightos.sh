@@ -91,6 +91,17 @@ if [[ -d "$ROOT/components" ]]; then
 fi
 
 
+
+# LIGHTOS_VISUALIZER_ART_INSTALL
+art_installer="$ROOT/components/LightOS-Assets/assets/visualizer/install.sh"
+
+if [[ -f "$art_installer" ]]; then
+    bash "$art_installer"
+else
+    echo "Visualizer artwork installer missing." >&2
+    exit 1
+fi
+
 # LIGHTOS_HYBRID_VISUALIZER_INSTALL
 hybrid_installer="$ROOT/components/LightOS-Widgets/visualizer/hybrid/install.sh"
 
