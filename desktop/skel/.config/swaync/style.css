@@ -494,69 +494,179 @@ scrollbar trough {
 
 /* LIGHTOS_NOTIFICATION_TEXT_END */
 
-/* LIGHTOS_SWAYNC_FINAL_START */
-/* One authoritative gothic theme; SwayNC config.json and widget actions are unchanged. */
+/* LIGHTOS_DEATHNOTE_THEME_START */
+/* LightOS gothic notification center. Overrides appended after existing styles. */
 .control-center {
-  background-color: #13070d;
-  background-image: url("themes/lightos-gothic/swaync-panel-380.png");
+  background-color: #120407;
+  background-image: url("/home/LIGHT/.config/swaync/themes/lightos-deathnote/notification-center.png");
   background-repeat: no-repeat;
-  background-position: center top;
-  border: 0;
-  border-radius: 16px;
-  color: #f8dfd1;
-  padding: 9px;
+  background-position: top center;
+  background-size: 100% 100%;
+  color: #ffe7d8;
+  border: 1px solid #8c2439;
+  border-radius: 14px;
+  padding: 8px;
 }
-/* Portrait is in the upper ~220px of the 380px-wide artwork. */
-.control-center .widget-title { margin-top: 215px; padding: 0 8px; }
+/* Keep the portrait visible above the control center widgets. */
+.control-center .widget-title { margin-top: 155px; }
 .control-center .widget-title > label {
   font-family: "LightOSNew12";
-  font-size: 15px;
-  font-weight: bold;
-  color: #f8dcc7;
-  text-shadow: 0 1px 3px #120307;
+  font-size: 17px;
+  color: #ffe2d0;
+  text-shadow: 0 1px 4px #160207;
 }
-.control-center .widget-title button {
-  background: rgba(45, 7, 17, 0.9);
-  border: 1px solid #b34a58;
-  border-radius: 9px;
-  color: #ffe4d5;
-  padding: 5px 9px;
-}
+.control-center .widget-title button,
 .control-center .widget-dnd,
 .control-center .widget-mpris,
 .control-center .widget-volume,
 .control-center .widget-buttons-grid,
 .control-center .notification-group {
-  background-color: rgba(19, 5, 11, 0.76);
-  border-radius: 10px;
-  color: #f6d9cf;
-  margin: 3px 4px;
+  background-color: rgba(20, 4, 10, 0.77);
+  color: #f9d5ce;
+  border-radius: 9px;
 }
-.control-center .widget-mpris { padding: 4px; }
-.control-center .widget-buttons-grid > flowbox > flowboxchild > button {
-  background: rgba(72, 12, 28, 0.9);
-  border: 1px solid #aa4054;
-  border-radius: 12px;
-  color: #ffe3d7;
-  padding: 8px;
-}
-.control-center .widget-buttons-grid > flowbox > flowboxchild > button:hover,
-.control-center .widget-title button:hover { background-color: #87283e; }
-.control-center trough highlight { background-color: #c64b68; }
-.control-center trough slider { background-color: #f4c5bd; }
 .notification-background .notification {
-  background-color: #210911;
-  background-image: url("themes/lightos-gothic/notification-card-400.png");
+  background-color: #1a050b;
+  background-image: url("/home/LIGHT/.config/swaync/themes/lightos-deathnote/notification-card.png");
   background-repeat: no-repeat;
   background-position: center;
-  border: 1px solid #96344b;
+  background-size: 100% 100%;
+  color: #ffe4d9;
+  border: 1px solid #9a3544;
   border-radius: 12px;
-  color: #f8ded4;
 }
 .notification .notification-content,
-.notification .notification-default-action { background-color: transparent; }
-.notification-content .summary { color: #ffe4d2; font-family: "LightOSNew12"; font-weight: bold; }
+.notification .notification-default-action {
+  background-color: transparent;
+}
+.notification-content .summary {
+  font-family: "LightOSNew12";
+  color: #ffddc9;
+  font-weight: bold;
+  text-shadow: 0 1px 3px #140206;
+}
 .notification-content .body,
-.notification-content .app-name,
-.notification-content .time { color: #e8bcb8; font-family: "LightOSNew12"; }
-/* LIGHTOS_SWAYNC_FINAL_END */
+.notification-content .time,
+.notification-content .app-name {
+  font-family: "LightOSNew12";
+  color: #e7b8b4;
+}
+.notification-background .close-button,
+.control-center .widget-title button {
+  background-color: #42101d;
+  color: #ffe3d5;
+  border: 1px solid #a84255;
+}
+/* LIGHTOS_DEATHNOTE_THEME_END */
+
+/* LIGHTOS_GOTHIC_V2_START */
+/* LightOS Gothic SwayNC. Portrait region kept clear by title top margin. */
+.control-center {
+  background-color: #15070d;
+  background-image: url("/home/LIGHT/.config/swaync/themes/lightos-gothic/swaync-panel-380.png");
+  background-repeat: no-repeat;
+  background-position: center top;
+  color: #f9e2d5;
+  border: 1px solid #842237;
+  border-radius: 15px;
+}
+.control-center .widget-title { margin-top: 180px; }
+.control-center .widget-title > label { font-family: "LightOSNew12"; font-size: 16px; color: #ffe1c9; }
+.control-center .widget-title button,
+.control-center .widget-dnd,
+.control-center .widget-mpris,
+.control-center .widget-volume,
+.control-center .widget-buttons-grid,
+.control-center .notification-group {
+  background-color: rgba(20, 4, 12, 0.79);
+  border-radius: 12px;
+  color: #f9d6ca;
+}
+.control-center .widget-buttons-grid > flowbox > flowboxchild > button {
+  background-color: rgba(74, 14, 30, 0.88);
+  border: 1px solid #ad3d50;
+  border-radius: 18px;
+}
+.notification-background .notification {
+  background-color: #220912;
+  background-image: url("/home/LIGHT/.config/swaync/themes/lightos-gothic/notification-card-400.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  color: #ffe3d5;
+  border: 1px solid #a43b50;
+  border-radius: 13px;
+}
+.notification-content .summary { font-family: "LightOSNew12"; color: #ffe3cf; font-weight: bold; }
+.notification-content .body, .notification-content .time, .notification-content .app-name {
+  font-family: "LightOSNew12"; color: #edc1b9;
+}
+.control-center .widget-title button:hover,
+.notification-background .close-button:hover { background-color: #8a263d; }
+/* LIGHTOS_GOTHIC_V2_END */
+
+/* LIGHTOS_GOTHIC_MPRIS_V4 */
+
+/* Media player container */
+.control-center .widget-mpris {
+    background-color: rgba(24, 5, 13, 0.92);
+    border: 1px solid #9c3448;
+    border-radius: 16px;
+    padding: 8px;
+    margin: 8px 3px;
+    box-shadow: 0 0 12px rgba(140, 20, 45, 0.35);
+}
+
+/* Player card */
+.widget-mpris .widget-mpris-player {
+    background-color: rgba(37, 7, 17, 0.95);
+    border: 1px solid #7e263b;
+    border-radius: 14px;
+    padding: 10px;
+    color: #ffe2d4;
+}
+
+/* Album art / video thumbnail */
+.widget-mpris .widget-mpris-player .widget-mpris-album-art {
+    border-radius: 12px;
+    background-color: #210811;
+}
+
+/* Track / video title */
+.widget-mpris .widget-mpris-title {
+    color: #ffe2d4;
+    font-family: "LightOSNew12";
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/* Artist / media source */
+.widget-mpris .widget-mpris-subtitle {
+    color: #d89b9d;
+    font-family: "LightOSNew12";
+    font-size: 12px;
+}
+
+/* Playback buttons */
+.widget-mpris button {
+    background-color: rgba(75, 12, 30, 0.88);
+    color: #ffd9cc;
+    border: 1px solid #a84357;
+    border-radius: 999px;
+    min-width: 32px;
+    min-height: 32px;
+    padding: 5px;
+}
+
+.widget-mpris button:hover {
+    background-color: #8c2945;
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(225, 72, 107, 0.5);
+}
+
+/* Player selector indicators */
+.widget-mpris .widget-mpris-player-selector {
+    color: #f1b0b7;
+    background-color: transparent;
+}
+
+/* LIGHTOS_GOTHIC_MPRIS_V4_END */
