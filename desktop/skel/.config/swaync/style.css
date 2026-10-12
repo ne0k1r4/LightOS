@@ -498,7 +498,7 @@ scrollbar trough {
 /* LightOS gothic notification center. Overrides appended after existing styles. */
 .control-center {
   background-color: #120407;
-  background-image: url("/home/LIGHT/.config/swaync/themes/lightos-deathnote/notification-center.png");
+  background-image: url("themes/lightos-gothic/swaync-panel-380.png");
   background-repeat: no-repeat;
   background-position: top center;
   background-size: 100% 100%;
@@ -527,7 +527,7 @@ scrollbar trough {
 }
 .notification-background .notification {
   background-color: #1a050b;
-  background-image: url("/home/LIGHT/.config/swaync/themes/lightos-deathnote/notification-card.png");
+  background-image: url("themes/lightos-gothic/notification-card-400.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
@@ -563,7 +563,7 @@ scrollbar trough {
 /* LightOS Gothic SwayNC. Portrait region kept clear by title top margin. */
 .control-center {
   background-color: #15070d;
-  background-image: url("/home/LIGHT/.config/swaync/themes/lightos-gothic/swaync-panel-380.png");
+  background-image: url("themes/lightos-gothic/swaync-panel-380.png");
   background-repeat: no-repeat;
   background-position: center top;
   color: #f9e2d5;
@@ -589,7 +589,7 @@ scrollbar trough {
 }
 .notification-background .notification {
   background-color: #220912;
-  background-image: url("/home/LIGHT/.config/swaync/themes/lightos-gothic/notification-card-400.png");
+  background-image: url("themes/lightos-gothic/notification-card-400.png");
   background-repeat: no-repeat;
   background-position: center center;
   color: #ffe3d5;
