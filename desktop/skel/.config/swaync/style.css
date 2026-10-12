@@ -670,3 +670,25 @@ scrollbar trough {
 }
 
 /* LIGHTOS_GOTHIC_MPRIS_V4_END */
+
+/* LIGHTOS_SWAYNC_TRANSPARENT_CORNERS */
+
+.control-center {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: 20px;
+}
+
+.control-center-window,
+.control-center-window > box,
+.control-center .control-center-list {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.notification-row {
+    background-color: transparent;
+}
+
