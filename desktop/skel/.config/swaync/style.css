@@ -493,3 +493,70 @@ scrollbar trough {
 }
 
 /* LIGHTOS_NOTIFICATION_TEXT_END */
+
+/* LIGHTOS_SWAYNC_FINAL_START */
+/* One authoritative gothic theme; SwayNC config.json and widget actions are unchanged. */
+.control-center {
+  background-color: #13070d;
+  background-image: url("themes/lightos-gothic/swaync-panel-380.png");
+  background-repeat: no-repeat;
+  background-position: center top;
+  border: 0;
+  border-radius: 16px;
+  color: #f8dfd1;
+  padding: 9px;
+}
+/* Portrait is in the upper ~220px of the 380px-wide artwork. */
+.control-center .widget-title { margin-top: 215px; padding: 0 8px; }
+.control-center .widget-title > label {
+  font-family: "LightOSNew12";
+  font-size: 15px;
+  font-weight: bold;
+  color: #f8dcc7;
+  text-shadow: 0 1px 3px #120307;
+}
+.control-center .widget-title button {
+  background: rgba(45, 7, 17, 0.9);
+  border: 1px solid #b34a58;
+  border-radius: 9px;
+  color: #ffe4d5;
+  padding: 5px 9px;
+}
+.control-center .widget-dnd,
+.control-center .widget-mpris,
+.control-center .widget-volume,
+.control-center .widget-buttons-grid,
+.control-center .notification-group {
+  background-color: rgba(19, 5, 11, 0.76);
+  border-radius: 10px;
+  color: #f6d9cf;
+  margin: 3px 4px;
+}
+.control-center .widget-mpris { padding: 4px; }
+.control-center .widget-buttons-grid > flowbox > flowboxchild > button {
+  background: rgba(72, 12, 28, 0.9);
+  border: 1px solid #aa4054;
+  border-radius: 12px;
+  color: #ffe3d7;
+  padding: 8px;
+}
+.control-center .widget-buttons-grid > flowbox > flowboxchild > button:hover,
+.control-center .widget-title button:hover { background-color: #87283e; }
+.control-center trough highlight { background-color: #c64b68; }
+.control-center trough slider { background-color: #f4c5bd; }
+.notification-background .notification {
+  background-color: #210911;
+  background-image: url("themes/lightos-gothic/notification-card-400.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 1px solid #96344b;
+  border-radius: 12px;
+  color: #f8ded4;
+}
+.notification .notification-content,
+.notification .notification-default-action { background-color: transparent; }
+.notification-content .summary { color: #ffe4d2; font-family: "LightOSNew12"; font-weight: bold; }
+.notification-content .body,
+.notification-content .app-name,
+.notification-content .time { color: #e8bcb8; font-family: "LightOSNew12"; }
+/* LIGHTOS_SWAYNC_FINAL_END */
