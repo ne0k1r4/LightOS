@@ -92,6 +92,16 @@ fi
 
 
 
+# LIGHTOS_DEATH_NOTE_PILL_INSTALL
+pill_installer="$ROOT/components/LightOS-Widgets/quickshell/death-note-pill/install.sh"
+
+if [[ -f "$pill_installer" ]]; then
+    bash "$pill_installer"
+else
+    echo "Death Note Gothic pill installer missing." >&2
+    exit 1
+fi
+
 # LIGHTOS_VISUALIZER_ART_INSTALL
 art_installer="$ROOT/components/LightOS-Assets/assets/visualizer/install.sh"
 

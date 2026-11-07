@@ -63,3 +63,4 @@ zsh
 # LightOS Animated Capsule dependencies
 # eww - AUR package, install via: yay -S eww
 # gtk3, gtk-layer-shell, playerctl (already in list above)
+quickshell

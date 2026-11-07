@@ -22,7 +22,7 @@ hl.on("hyprland.start", function()
 
   hl.exec_cmd("copyq --start-server")
   hl.exec_cmd("swaync")
-  hl.exec_cmd("~/.config/eww/pink-capsule/start.sh")
+  hl.exec_cmd("~/.local/bin/lightos-pill-v11 start")
   -- hl.exec_cmd("~/.config/hypr/autoruns.sh")  -- file missing, disabled
   hl.exec_cmd("~/.config/Light/bday/bday")
 

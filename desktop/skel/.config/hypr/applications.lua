@@ -12,7 +12,7 @@ M.screenshot_screen = "~/.config/hypr/Scripts/screenshot-full.sh"
 M.light_widget_stats = "~/.config/Light/bin/light-widget-daemon --stats"
 M.notifications       = "swaync-client -t"
 M.wallpaper_menu = "~/.config/rofi/scripts/rofi-wallpaper.sh"
-M.waybar_hide = [[sh -c "pkill waybar || waybar"]]
+M.waybar_hide = "~/.local/bin/lightos-pill-v11 toggle"
 M.lang = "fcitx5-remote -n"
 
 return M
