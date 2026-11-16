@@ -1,0 +1,150 @@
+# LightOS V12.2 - Crimson Ink Awakening
+Window.SetBackgroundTopColor(0.0, 0.0, 0.0);
+Window.SetBackgroundBottomColor(0.0, 0.0, 0.0);
+frames = [];
+frames[0] = Image("frames/frame_000.png");
+frames[1] = Image("frames/frame_001.png");
+frames[2] = Image("frames/frame_002.png");
+frames[3] = Image("frames/frame_003.png");
+frames[4] = Image("frames/frame_004.png");
+frames[5] = Image("frames/frame_005.png");
+frames[6] = Image("frames/frame_006.png");
+frames[7] = Image("frames/frame_007.png");
+frames[8] = Image("frames/frame_008.png");
+frames[9] = Image("frames/frame_009.png");
+frames[10] = Image("frames/frame_010.png");
+frames[11] = Image("frames/frame_011.png");
+frames[12] = Image("frames/frame_012.png");
+frames[13] = Image("frames/frame_013.png");
+frames[14] = Image("frames/frame_014.png");
+frames[15] = Image("frames/frame_015.png");
+frames[16] = Image("frames/frame_016.png");
+frames[17] = Image("frames/frame_017.png");
+frames[18] = Image("frames/frame_018.png");
+frames[19] = Image("frames/frame_019.png");
+frames[20] = Image("frames/frame_020.png");
+frames[21] = Image("frames/frame_021.png");
+frames[22] = Image("frames/frame_022.png");
+frames[23] = Image("frames/frame_023.png");
+frames[24] = Image("frames/frame_024.png");
+frames[25] = Image("frames/frame_025.png");
+frames[26] = Image("frames/frame_026.png");
+frames[27] = Image("frames/frame_027.png");
+frames[28] = Image("frames/frame_028.png");
+frames[29] = Image("frames/frame_029.png");
+frames[30] = Image("frames/frame_030.png");
+frames[31] = Image("frames/frame_031.png");
+frames[32] = Image("frames/frame_032.png");
+frames[33] = Image("frames/frame_033.png");
+frames[34] = Image("frames/frame_034.png");
+frames[35] = Image("frames/frame_035.png");
+frames[36] = Image("frames/frame_036.png");
+frames[37] = Image("frames/frame_037.png");
+frames[38] = Image("frames/frame_038.png");
+frames[39] = Image("frames/frame_039.png");
+frames[40] = Image("frames/frame_040.png");
+frames[41] = Image("frames/frame_041.png");
+frames[42] = Image("frames/frame_042.png");
+frames[43] = Image("frames/frame_043.png");
+frames[44] = Image("frames/frame_044.png");
+frames[45] = Image("frames/frame_045.png");
+frames[46] = Image("frames/frame_046.png");
+frames[47] = Image("frames/frame_047.png");
+frames[48] = Image("frames/frame_048.png");
+frames[49] = Image("frames/frame_049.png");
+frames[50] = Image("frames/frame_050.png");
+frames[51] = Image("frames/frame_051.png");
+frames[52] = Image("frames/frame_052.png");
+frames[53] = Image("frames/frame_053.png");
+frames[54] = Image("frames/frame_054.png");
+frames[55] = Image("frames/frame_055.png");
+frames[56] = Image("frames/frame_056.png");
+frames[57] = Image("frames/frame_057.png");
+frames[58] = Image("frames/frame_058.png");
+frames[59] = Image("frames/frame_059.png");
+frames[60] = Image("frames/frame_060.png");
+frames[61] = Image("frames/frame_061.png");
+frames[62] = Image("frames/frame_062.png");
+frames[63] = Image("frames/frame_063.png");
+frames[64] = Image("frames/frame_064.png");
+frames[65] = Image("frames/frame_065.png");
+frames[66] = Image("frames/frame_066.png");
+frames[67] = Image("frames/frame_067.png");
+frames[68] = Image("frames/frame_068.png");
+frames[69] = Image("frames/frame_069.png");
+frames[70] = Image("frames/frame_070.png");
+frames[71] = Image("frames/frame_071.png");
+frames[72] = Image("frames/frame_072.png");
+frames[73] = Image("frames/frame_073.png");
+frames[74] = Image("frames/frame_074.png");
+frames[75] = Image("frames/frame_075.png");
+frames[76] = Image("frames/frame_076.png");
+frames[77] = Image("frames/frame_077.png");
+frames[78] = Image("frames/frame_078.png");
+frames[79] = Image("frames/frame_079.png");
+frames[80] = Image("frames/frame_080.png");
+frames[81] = Image("frames/frame_081.png");
+frames[82] = Image("frames/frame_082.png");
+frames[83] = Image("frames/frame_083.png");
+frames[84] = Image("frames/frame_084.png");
+frames[85] = Image("frames/frame_085.png");
+frames[86] = Image("frames/frame_086.png");
+frames[87] = Image("frames/frame_087.png");
+frames[88] = Image("frames/frame_088.png");
+frames[89] = Image("frames/frame_089.png");
+frames[90] = Image("frames/frame_090.png");
+frames[91] = Image("frames/frame_091.png");
+frames[92] = Image("frames/frame_092.png");
+frames[93] = Image("frames/frame_093.png");
+frames[94] = Image("frames/frame_094.png");
+frames[95] = Image("frames/frame_095.png");
+frames[96] = Image("frames/frame_096.png");
+frames[97] = Image("frames/frame_097.png");
+frames[98] = Image("frames/frame_098.png");
+frames[99] = Image("frames/frame_099.png");
+frames[100] = Image("frames/frame_100.png");
+frames[101] = Image("frames/frame_101.png");
+frames[102] = Image("frames/frame_102.png");
+frames[103] = Image("frames/frame_103.png");
+frames[104] = Image("frames/frame_104.png");
+frames[105] = Image("frames/frame_105.png");
+frames[106] = Image("frames/frame_106.png");
+frames[107] = Image("frames/frame_107.png");
+frames[108] = Image("frames/frame_108.png");
+frames[109] = Image("frames/frame_109.png");
+frames[110] = Image("frames/frame_110.png");
+frames[111] = Image("frames/frame_111.png");
+frames[112] = Image("frames/frame_112.png");
+frames[113] = Image("frames/frame_113.png");
+frames[114] = Image("frames/frame_114.png");
+frames[115] = Image("frames/frame_115.png");
+frames[116] = Image("frames/frame_116.png");
+frames[117] = Image("frames/frame_117.png");
+frames[118] = Image("frames/frame_118.png");
+frames[119] = Image("frames/frame_119.png");
+
+current = 16;
+last_index = -1;
+sprite = Sprite(frames[current]);
+sprite.SetZ(100);
+
+fun refresh_callback() {
+    if (current != last_index) {
+        sprite.SetImage(frames[current]);
+        last_index = current;
+    }
+    sprite.SetPosition(
+        (Window.GetWidth() - 360) / 2,
+        (Window.GetHeight() - 358) / 2,
+        100
+    );
+    if (current < 88) {
+        current += 2;
+        if (current > 88) current = 88;
+    } else {
+        current++;
+        if (current >= 120) current = 88;
+    }
+}
+
+Plymouth.SetRefreshFunction(refresh_callback);

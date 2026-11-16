@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=LightOS V12.2 Crimson Ink Awakening
+Description=Centered progressive ink drawing with Misa and rotating ruby ring
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/lightos-v12-crimson-ink
+ScriptFile=/usr/share/plymouth/themes/lightos-v12-crimson-ink/lightos-v12-crimson-ink.script
